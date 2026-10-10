@@ -1,4 +1,8 @@
 # SkySync: A Policy-Grounded Safety Gateway for 5G and Aerodrome-Corridor Coexistence
+[Team SNR proposal](https://docs.google.com/document/d/1R2OOkgjofgddBhkbVAP43HQoeG9p73uM/edit?usp=sharing&ouid=113427882934277576490&rtpof=true&sd=true)
+[Demo video](https://drive.google.com/file/d/1vowyXtQ0W5zpVqmdMmZQT2trbwVQg_aH/view?usp=sharing)
+[Knowledge base description](https://docs.google.com/document/d/1OKRAIhRJaPcJHHKCQFy9cDT35K6sCphDkspXb6X5k7g/edit?usp=sharing)
+
 
 **ITU AI for Good Sandbox Build-a-thon 5.0**  
 **Host Country:** India | **Track:** Telecommunications (5G and Aviation Spectrum Coexistence)  
