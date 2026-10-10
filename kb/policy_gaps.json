@@ -1,0 +1,153 @@
+[
+ {
+  "gap_id": "GAP-001",
+  "title": "Cross-domain real-time coordination interface",
+  "type": "potential_gap",
+  "confidence": 0.86,
+  "evidence_claims": [
+   "CLM-023",
+   "CLM-024",
+   "CLM-032",
+   "CLM-033"
+  ],
+  "description": "Sources establish separate aviation-safety and spectrum responsibilities and demonstrate coordination/data sharing, but the corpus does not identify one standardized machine-readable interface for exchanging live aircraft/5G risk state and authorized mitigation actions."
+ },
+ {
+  "gap_id": "GAP-002",
+  "title": "Machine-readable authorization for dynamic network actions",
+  "type": "architecture_gap",
+  "confidence": 0.84,
+  "evidence_claims": [
+   "CLM-010",
+   "CLM-032",
+   "CLM-035"
+  ],
+  "description": "The corpus defines management/orchestration and spectrum authority constraints, but does not establish a universal machine-readable policy interface an autonomous optimizer can query before changing RF/network parameters in aviation-sensitive areas."
+ },
+ {
+  "gap_id": "GAP-003",
+  "title": "Jurisdiction/version-aware policy reasoning",
+  "type": "architecture_gap",
+  "confidence": 0.95,
+  "evidence_claims": [
+   "CLM-026",
+   "CLM-029",
+   "CLM-030",
+   "CLM-036"
+  ],
+  "description": "India, US and European evidence shows evolving and jurisdiction-specific approaches. The policy agent therefore needs explicit jurisdiction, effective-date and supersession logic."
+ },
+ {
+  "gap_id": "GAP-004",
+  "title": "Evidence-backed dynamic safety-margin model",
+  "type": "simulation_gap",
+  "confidence": 0.98,
+  "evidence_claims": [
+   "CLM-019",
+   "CLM-020",
+   "CLM-021"
+  ],
+  "description": "Authoritative guidance identifies relevant RF/geometry/propagation variables, but the simulator still needs a transparent model mapping those variables to a numeric safety-margin score. That score must remain labelled simulation/model output."
+ },
+ {
+  "gap_id": "GAP-005",
+  "title": "Common telecom-aviation ontology",
+  "type": "interoperability_gap",
+  "confidence": 0.93,
+  "evidence_claims": [
+   "CLM-003",
+   "CLM-010",
+   "CLM-015",
+   "CLM-032"
+  ],
+  "description": "Different authorities use different vocabularies. A shared ontology for cell, antenna, aircraft, protected area, spectrum assignment, constraint, authorization and mitigation action is needed for reliable agent retrieval/arbitration."
+ },
+ {
+  "gap_id": "GAP-006",
+  "title": "India airport-area 5G restriction parameters not found in primary sources",
+  "type": "evidence_gap",
+  "confidence": 0.9,
+  "evidence_claims": [
+   "CLM-135",
+   "CLM-136"
+  ],
+  "description": "Press cites DGCA/DoT interim restrictions near airports but the KB holds no primary text with exclusion distances, power or tilt limits. Needed before any India-specific numeric constraint can be enforced. Action: obtain DoT/DGCA circulars."
+ },
+ {
+  "gap_id": "GAP-007",
+  "title": "India has no numeric RA tolerance threshold in AIC 19/2025",
+  "type": "regulatory_gap",
+  "confidence": 0.85,
+  "evidence_claims": [
+   "CLM-134"
+  ],
+  "description": "Appendices define tolerance qualitatively; the US ITM (CLM-104/109) is the only numeric public benchmark in the KB. Using it for India is an analogy, not a legal requirement."
+ },
+ {
+  "gap_id": "GAP-008",
+  "title": "Temporal gap: India limitations not yet effective",
+  "type": "temporal_gap",
+  "confidence": 0.99,
+  "evidence_claims": [
+   "CLM-131"
+  ],
+  "description": "Between today and 2027-12-31 India has no in-force numeric/aircraft-category restriction in the KB; agents must reason over effective dates (extends GAP-003)."
+ },
+ {
+  "gap_id": "GAP-009",
+  "title": "Controlled/blocked primary texts",
+  "type": "ingestion_gap",
+  "confidence": 1.0,
+  "evidence_claims": [],
+  "description": "ICAO guidance (MID-Doc-015), ICAO WP/NACC papers, ITU-R M.2059 numbers, FCC R&O, NFAP-2025 body, Telecom Act text and 3GPP TS 23.501/23.502/28.xxx clause text were not ingested (blocked, licensed or not fetched)."
+ },
+ {
+  "gap_id": "GAP-006",
+  "title": "India airport-area 5G restriction parameters not found in primary sources",
+  "type": "evidence_gap",
+  "confidence": 0.9,
+  "evidence_claims": [
+   "CLM-135",
+   "CLM-136"
+  ],
+  "description": "Press cites DGCA/DoT interim restrictions near airports but the KB holds no primary text with exclusion distances, power or tilt limits. Needed before any India-specific numeric constraint can be enforced. Action: obtain DoT/DGCA circulars."
+ },
+ {
+  "gap_id": "GAP-007",
+  "title": "India has no numeric RA tolerance threshold in AIC 19/2025",
+  "type": "regulatory_gap",
+  "confidence": 0.85,
+  "evidence_claims": [
+   "CLM-134"
+  ],
+  "description": "Appendices define tolerance qualitatively; the US ITM (CLM-104/109) is the only numeric public benchmark in the KB. Using it for India is an analogy, not a legal requirement."
+ },
+ {
+  "gap_id": "GAP-008",
+  "title": "Temporal gap: India limitations not yet effective",
+  "type": "temporal_gap",
+  "confidence": 0.99,
+  "evidence_claims": [
+   "CLM-131"
+  ],
+  "description": "Between today and 2027-12-31 India has no in-force numeric/aircraft-category restriction in the KB; agents must reason over effective dates (extends GAP-003)."
+ },
+ {
+  "gap_id": "GAP-009",
+  "title": "Controlled/blocked primary texts",
+  "type": "ingestion_gap",
+  "confidence": 1.0,
+  "evidence_claims": [],
+  "description": "ICAO guidance (MID-Doc-015), ICAO WP/NACC papers, ITU-R M.2059 numbers, FCC R&O, NFAP-2025 body, Telecom Act text and 3GPP TS 23.501/23.502/28.xxx clause text were not ingested (blocked, licensed or not fetched)."
+ },
+ {
+  "gap_id": "GAP-010",
+  "title": "No evidence for tilt/beam/per-beam power actuation or latency",
+  "type": "evidence_gap",
+  "confidence": 0.9,
+  "evidence_claims": [
+   "CLM-164"
+  ],
+  "description": "Needed so the Optimization agent only proposes actions the Network agent can show are actuable; ingest TS 28.541 RET/antenna objects, O-RAN/vendor APIs, and measured actuation latency."
+ }
+]

@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkySync | Aerodrome 5G & Flight Safety Optimization</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --sky-bg: #f4f8fb;
+      --sky-surface: #ffffff;
+      --sky-blue: #1e88e5;
+      --sky-blue-hover: #1565c0;
+      --sky-light: #e3f2fd;
+      --sky-cyan: #0288d1;
+      --cream-warm: #fcfbf7;
+      --cream-card: #f9fbfd;
+      --navy-dark: #102a43;
+      --navy-muted: #486581;
+      --border-soft: #d9e2ec;
+      --border-subtle: #edf2f7;
+      
+      --pastel-green: #d1fae5;
+      --text-green: #065f46;
+      --pastel-red: #fee2e2;
+      --text-red: #991b1b;
+      --pastel-amber: #fef3c7;
+      --text-amber: #92400e;
+      --pastel-purple: #ede9fe;
+      --text-purple: #5b21b6;
+      --pastel-blue: #e0f2fe;
+      --text-blue: #0369a1;
+
+      --shadow-sm: 0 1px 3px rgba(16, 42, 67, 0.05);
+      --shadow-md: 0 4px 12px rgba(16, 42, 67, 0.07);
+      --shadow-lg: 0 8px 24px rgba(16, 42, 67, 0.09);
+      --radius: 12px;
+      --radius-sm: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--sky-bg);
+      background-image: 
+        radial-gradient(circle at 10% 10%, rgba(30, 136, 229, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 90% 90%, rgba(2, 136, 209, 0.04) 0%, transparent 50%);
+      color: var(--navy-dark);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* Top Navigation */
+    header {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-soft);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 14px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--sky-blue), #64b5f6);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(30, 136, 229, 0.25);
+    }
+
+    .brand-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: #ffffff;
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--navy-dark);
+      letter-spacing: -0.3px;
+    }
+
+    .brand-subtitle {
+      font-size: 0.76rem;
+      color: var(--navy-muted);
+      font-weight: 500;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--pastel-green);
+      color: var(--text-green);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+    }
+
+    .btn-run {
+      background: var(--sky-blue);
+      color: #ffffff;
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: 9px 20px;
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(30, 136, 229, 0.3);
+    }
+
+    .btn-run:hover {
+      background: var(--sky-blue-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(30, 136, 229, 0.4);
+    }
+
+    /* Sub-header Navigation Tabs */
+    .tab-bar {
+      display: flex;
+      gap: 8px;
+      padding: 12px 32px 0;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .tab-btn {
+      padding: 10px 18px;
+      border: none;
+      background: transparent;
+      color: var(--navy-muted);
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tab-btn:hover {
+      color: var(--sky-blue);
+    }
+
+    .tab-btn.active {
+      color: var(--sky-blue);
+      border-bottom-color: var(--sky-blue);
+    }
+
+    /* Content Area */
+    main {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 24px 32px;
+    }
+
+    .tab-pane {
+      display: none;
+    }
+
+    .tab-pane.active {
+      display: block;
+    }
+
+    .two-col-layout {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 24px;
+    }
+
+    /* Card styling */
+    .card {
+      background: var(--sky-surface);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--navy-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Form Fields */
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--navy-muted);
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .form-input {
+      width: 100%;
+      background: var(--cream-warm);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      color: var(--navy-dark);
+      outline: none;
+      font-family: inherit;
+    }
+
+    .form-input:focus {
+      border-color: var(--sky-blue);
+      background: #ffffff;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    /* Interactive Flight Telemetry Panel */
+    .telemetry-summary {
+      background: var(--cream-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      margin-top: 14px;
+    }
+
+    .telemetry-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      font-size: 0.82rem;
+    }
+
+    .telemetry-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .telemetry-key {
+      color: var(--navy-muted);
+    }
+
+    .telemetry-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+      color: var(--navy-dark);
+    }
+
+    /* Decision Banner */
+    .decision-card {
+      background: #ffffff;
+      border-left: 5px solid #10b981;
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      border-top: 1px solid var(--border-soft);
+      border-right: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .decision-card.reject {
+      border-left-color: #ef4444;
+    }
+
+    .decision-badge-pill {
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: var(--pastel-green);
+      color: var(--text-green);
+      letter-spacing: 0.4px;
+    }
+
+    .decision-text-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--navy-dark);
+      margin-bottom: 6px;
+    }
+
+    .decision-text-desc {
+      font-size: 0.88rem;
+      color: var(--navy-muted);
+      line-height: 1.5;
+    }
+
+    /* 6 Agent Cards Grid */
+    .agent-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .agent-box {
+      background: var(--sky-surface);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s;
+    }
+
+    .agent-box:hover {
+      border-color: #b0c4de;
+      box-shadow: var(--shadow-md);
+    }
+
+    .agent-box-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .agent-title-text {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--navy-dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .agent-role-pill {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: var(--sky-light);
+      color: var(--sky-blue);
+    }
+
+    .agent-statement {
+      font-size: 0.84rem;
+      color: #334e68;
+      margin-bottom: 12px;
+      line-height: 1.45;
+    }
+
+    /* Chain of Thought Stepper */
+    .cot-container {
+      background: var(--cream-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      margin-bottom: 12px;
+    }
+
+    .cot-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--navy-muted);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cot-step {
+      font-size: 0.78rem;
+      color: #486581;
+      padding: 4px 0;
+      border-left: 2px solid var(--sky-blue);
+      padding-left: 8px;
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+
+    .cot-step:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Evidence Chips with Hover Triggers */
+    .chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .interactive-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: var(--pastel-blue);
+      color: var(--text-blue);
+      border: 1px solid #bae6fd;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.15s;
+    }
+
+    .interactive-chip:hover {
+      background: #bae6fd;
+      transform: translateY(-1px);
+    }
+
+    .chip-conflict {
+      background: var(--pastel-amber);
+      color: var(--text-amber);
+      border-color: #fde68a;
+    }
+
+    .chip-constraint {
+      background: var(--pastel-purple);
+      color: var(--text-purple);
+      border-color: #ddd6fe;
+    }
+
+    .chip-action {
+      background: #e2e8f0;
+      color: #334155;
+      border-color: #cbd5e1;
+    }
+
+    /* Hover Details Tooltip / Card */
+    #hoverPopover {
+      display: none;
+      position: absolute;
+      z-index: 1000;
+      width: 320px;
+      background: #ffffff;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      box-shadow: var(--shadow-lg);
+      font-size: 0.8rem;
+      line-height: 1.45;
+      pointer-events: none;
+    }
+
+    .pop-header {
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--navy-dark);
+      margin-bottom: 4px;
+    }
+
+    .pop-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--sky-light);
+      color: var(--sky-blue);
+      margin-bottom: 6px;
+    }
+
+    .pop-body {
+      color: #486581;
+      margin-bottom: 6px;
+    }
+
+    .pop-meta {
+      font-size: 0.72rem;
+      color: var(--navy-muted);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 6px;
+    }
+
+    /* Constraint Table */
+    .clean-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+
+    .clean-table th {
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 2px solid var(--border-soft);
+      color: var(--navy-muted);
+      font-weight: 600;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      background: var(--cream-warm);
+    }
+
+    .clean-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border-subtle);
+      vertical-align: middle;
+    }
+
+    .status-pill {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .status-pass {
+      background: var(--pastel-green);
+      color: var(--text-green);
+    }
+
+    .status-fail {
+      background: var(--pastel-red);
+      color: var(--text-red);
+    }
+
+    .status-unknown {
+      background: var(--pastel-amber);
+      color: var(--text-amber);
+    }
+
+    /* Graph Visual Representation (Tab 3) */
+    .graph-canvas-container {
+      background: #ffffff;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+    }
+
+    .graph-svg {
+      width: 100%;
+      max-width: 960px;
+      height: 480px;
+      margin: 0 auto;
+    }
+
+    .svg-node {
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .svg-node:hover {
+      transform: scale(1.02);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+      </div>
+      <div>
+        <div class="brand-title">SkySync Autonomous Coexistence</div>
+        <div class="brand-subtitle">Aerodrome Flight Corridor & 5G Transmission Safety Arbitration</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="status-badge" id="engineStatusBadge">
+        <span class="status-dot"></span>
+        <span>Reasoning Engine: Online & Autonomous</span>
+      </div>
+      <button class="btn-run" id="btnExecuteRun" onclick="runArbitration()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        Execute Coexistence Run
+      </button>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('tabOverview')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      Mission Overview & Telemetry
+    </button>
+    <button class="tab-btn" onclick="switchTab('tabAgents')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Multi-Agent Reasoning & Chains of Thought
+    </button>
+    <button class="tab-btn" onclick="switchTab('tabGraph')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><circle cx="6" cy="18" r="3"/><path d="M9 6h6m0 12H9m-3-9v6m12-6v6"/></svg>
+      Interactive Agent Planning Graph
+    </button>
+    <button class="tab-btn" onclick="switchTab('tabLedger')">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Constraint Verification Ledger
+    </button>
+  </div>
+
+  <main>
+    <!-- TAB 1: Mission Overview -->
+    <div id="tabOverview" class="tab-pane active">
+      <!-- Final Decision Card -->
+      <div class="decision-card" id="mainDecisionCard">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <div class="decision-text-title" id="decisionTitleText">ACT-2: Steer traffic to neighbouring cell (>1200 m)</div>
+          <span class="decision-badge-pill" id="decisionVerdictPill">ACCEPT_PREFERRED</span>
+        </div>
+        <div class="decision-text-desc" id="decisionDescText">
+          Traffic steering safely relieves cellular overload without raising radio frequency power in the aircraft approach cone. Preserves the mandatory 6 dB safety margin buffer while adhering to national licensing rules.
+        </div>
+      </div>
+
+      <div class="two-col-layout">
+        <!-- Left: Telemetry & Sandbox Inputs -->
+        <div>
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Flight & Runway Parameters</span>
+              <span style="font-size:0.75rem; color:var(--sky-blue); font-weight:600">DEMO-001</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Runway & Approach Category</label>
+              <div class="form-row">
+                <input class="form-input" id="cfgRunway" value="Runway 09L" readonly>
+                <input class="form-input" id="cfgApproach" value="ILS CAT II">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Aircraft Elevation Over Threshold (ft AGL)</label>
+              <input class="form-input" id="cfgAircraftH" type="number" value="450" oninput="recalcGeometry()">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Base Station Distance to Threshold (meters)</label>
+              <div class="form-row">
+                <input class="form-input" id="cfgCellDist" type="number" value="900" oninput="recalcGeometry()">
+                <input class="form-input" id="cfgCellLat" type="number" value="300" oninput="recalcGeometry()">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Operating 5G Band & Congestion</label>
+              <div class="form-row">
+                <input class="form-input" id="cfgBand" value="n78 (3.5 GHz)" readonly>
+                <input class="form-input" id="cfgLoad" value="94% PRB" readonly>
+              </div>
+            </div>
+
+            <!-- Dynamic Telemetry Box -->
+            <div class="telemetry-summary">
+              <div class="telemetry-item">
+                <span class="telemetry-key">3D Slant Distance:</span>
+                <span class="telemetry-value" id="dispSlantDist">957.5 m</span>
+              </div>
+              <div class="telemetry-item">
+                <span class="telemetry-key">Estimated PFD at Aircraft:</span>
+                <span class="telemetry-value" id="dispPfd">-38.6 dBW/m²/MHz</span>
+              </div>
+              <div class="telemetry-item">
+                <span class="telemetry-key">Calculated Safety Margin:</span>
+                <span class="telemetry-value" id="dispMargin" style="color:#059669">+42.1 dB</span>
+              </div>
+              <div class="telemetry-item">
+                <span class="telemetry-key">DGCA AIC 19/2025 Status:</span>
+                <span class="telemetry-value" style="color:#d97706">NOT_YET_IN_FORCE (2027)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Evaluated Actions -->
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Mitigation Action Menu</span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div style="background:var(--cream-card); border:1px solid var(--border-soft); padding:10px 12px; border-radius:8px; font-size:0.82rem;">
+                <span class="interactive-chip chip-action" onmouseenter="showEntityCard('ACT-1', event)" onmouseleave="hideEntityCard()">ACT-1</span>
+                <strong>Raise cell power +3 dB</strong>
+                <div style="color:var(--text-red); font-size:0.75rem; margin-top:2px;">Verdict: REJECT (Violates emission limits)</div>
+              </div>
+              <div style="background:var(--cream-card); border:1px solid #bbf7d0; padding:10px 12px; border-radius:8px; font-size:0.82rem;">
+                <span class="interactive-chip chip-action" onmouseenter="showEntityCard('ACT-2', event)" onmouseleave="hideEntityCard()">ACT-2</span>
+                <strong>Steer traffic to cell >1200 m</strong>
+                <div style="color:var(--text-green); font-size:0.75rem; margin-top:2px;">Verdict: ACCEPT_PREFERRED (Zero emission change)</div>
+              </div>
+              <div style="background:var(--cream-card); border:1px solid var(--border-soft); padding:10px 12px; border-radius:8px; font-size:0.82rem;">
+                <span class="interactive-chip chip-action" onmouseenter="showEntityCard('ACT-3', event)" onmouseleave="hideEntityCard()">ACT-3</span>
+                <strong>Downtilt 3° + Cap PRB Power</strong>
+                <div style="color:var(--text-blue); font-size:0.75rem; margin-top:2px;">Verdict: CONDITIONAL (Accept if margin ≥ 6 dB)</div>
+              </div>
+              <div style="background:var(--cream-card); border:1px solid var(--border-soft); padding:10px 12px; border-radius:8px; font-size:0.82rem;">
+                <span class="interactive-chip chip-action" onmouseenter="showEntityCard('ACT-4', event)" onmouseleave="hideEntityCard()">ACT-4</span>
+                <strong>Switch to 4100 MHz (n77)</strong>
+                <div style="color:var(--text-red); font-size:0.75rem; margin-top:2px;">Verdict: REJECT (Unlicensed in India & abuts 4.2 GHz)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Real-time Multi-Agent Summary Cards -->
+        <div>
+          <div class="agent-grid">
+            <!-- Network Agent -->
+            <div class="agent-box">
+              <div class="agent-box-header">
+                <span class="agent-title-text">Network Agent</span>
+                <span class="agent-role-pill">QoS & Congestion</span>
+              </div>
+              <div class="agent-statement" id="netStatement">
+                Base station exhibits severe 94% resource block utilization causing a 38% throughput drop. Evaluates offloading user equipments to adjacent cells.
+              </div>
+              <div class="chip-list">
+                <span class="interactive-chip" onmouseenter="showEntityCard('CLM-008', event)" onmouseleave="hideEntityCard()">CLM-008</span>
+                <span class="interactive-chip" onmouseenter="showEntityCard('CLM-009', event)" onmouseleave="hideEntityCard()">CLM-009</span>
+              </div>
+            </div>
+
+            <!-- Airspace Safety Agent -->
+            <div class="agent-box">
+              <div class="agent-box-header">
+                <span class="agent-title-text">Airspace Safety Agent</span>
+                <span class="agent-role-pill">Radar Altimeter Buffer</span>
+              </div>
+              <div class="agent-statement" id="safetyStatement">
+                Aircraft on ILS CAT II approach at 450 ft AGL. Verified that current base transmission maintains +42.1 dB margin. Dynamic power boost rejected.
+              </div>
+              <div class="chip-list">
+                <span class="interactive-chip" onmouseenter="showEntityCard('CLM-106', event)" onmouseleave="hideEntityCard()">CLM-106 (6dB)</span>
+                <span class="interactive-chip" onmouseenter="showEntityCard('CLM-109', event)" onmouseleave="hideEntityCard()">CLM-109</span>
+                <span class="interactive-chip chip-conflict" onmouseenter="showEntityCard('CONF-001', event)" onmouseleave="hideEntityCard()">CONF-001</span>
+              </div>
+            </div>
+
+            <!-- Spectrum Agent -->
+            <div class="agent-box">
+              <div class="agent-box-header">
+                <span class="agent-title-text">Spectrum Agent</span>
+                <span class="agent-role-pill">Band Protection</span>
+              </div>
+              <div class="agent-statement" id="specStatement">
+                Operating inside licensed 3300–3670 MHz band. Activating 4100 MHz would violate national licensing and encroach on protected 4200–4400 MHz band.
+              </div>
+              <div class="chip-list">
+                <span class="interactive-chip" onmouseenter="showEntityCard('CLM-140', event)" onmouseleave="hideEntityCard()">CLM-140 (RR 5.438)</span>
+                <span class="interactive-chip" onmouseenter="showEntityCard('CLM-130', event)" onmouseleave="hideEntityCard()">CLM-130</span>
+                <span class="interactive-chip chip-constraint" onmouseenter="showEntityCard('CON-INT-001', event)" onmouseleave="hideEntityCard()">CON-INT-001</span>
+              </div>
+            </div>
+
+            <!-- Policy Institutional Agent -->
+            <div class="agent-box">
+              <div class="agent-box-header">
+                <span class="agent-title-text">Policy Agent</span>
+                <span class="agent-role-pill">Jurisdiction & Dates</span>
+              </div>
+              <div class="agent-statement" id="policyStatement">
+                DGCA AIC 19/2025 carries a future effective date (Dec 2027) and is therefore NOT_YET_IN_FORCE as of 2026. Human authorization required for emissions.
+              </div>
+              <div class="chip-list">
+                <span class="interactive-chip" onmouseenter="showEntityCard('CLM-131', event)" onmouseleave="hideEntityCard()">CLM-131</span>
+                <span class="interactive-chip chip-conflict" onmouseenter="showEntityCard('GAP-006', event)" onmouseleave="hideEntityCard()">GAP-006</span>
+                <span class="interactive-chip chip-constraint" onmouseenter="showEntityCard('CON-IN-002', event)" onmouseleave="hideEntityCard()">CON-IN-002</span>
+              </div>
+            </div>
+
+            <!-- Optimization Agent -->
+            <div class="agent-box">
+              <div class="agent-box-header">
+                <span class="agent-title-text">Optimization Agent</span>
+                <span class="agent-role-pill">Pareto Trade-offs</span>
+              </div>
+              <div class="agent-statement" id="optStatement">
+                Evaluated multi-objective Pareto trade-off. Ranks traffic steering (ACT-2) as top priority to offload cell congestion without changing radiation envelope.
+              </div>
+              <div class="chip-list">
+                <span class="interactive-chip" onmouseenter="showEntityCard('CLM-151', event)" onmouseleave="hideEntityCard()">CLM-151 (ECC 362)</span>
+                <span class="interactive-chip" onmouseenter="showEntityCard('CLM-005', event)" onmouseleave="hideEntityCard()">CLM-005</span>
+              </div>
+            </div>
+
+            <!-- Arbitration Agent -->
+            <div class="agent-box" style="border: 1px solid #bbf7d0; background:#f0fdf4;">
+              <div class="agent-box-header">
+                <span class="agent-title-text" style="color:var(--text-green)">Arbitration Agent</span>
+                <span class="agent-role-pill" style="background:#bbf7d0; color:var(--text-green)">Deterministic Rule Code</span>
+              </div>
+              <div class="agent-statement" id="arbStatement">
+                Deterministic constraint checker rejects ACT-1 and ACT-4 due to hard constraints. Approves ACT-2 as optimal, compliant, and zero-risk mitigation.
+              </div>
+              <div class="chip-list">
+                <span class="interactive-chip" style="background:#fee2e2; color:#991b1b">ACT-1: REJECT</span>
+                <span class="interactive-chip" style="background:#fee2e2; color:#991b1b">ACT-4: REJECT</span>
+                <span class="interactive-chip" style="background:#d1fae5; color:#065f46">ACT-2: ACCEPT</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: Agent Reasoning & Chain of Thought -->
+    <div id="tabAgents" class="tab-pane">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Chain of Thought & Domain Reasoning Logs</span>
+          <span style="font-size:0.8rem; color:var(--navy-muted)">Plain English step-by-step logic from each autonomous agent</span>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <!-- Network COT -->
+          <div class="cot-container">
+            <div class="cot-title">Network Agent Logic Flow</div>
+            <div class="cot-step">1. <strong>Telemetry Inspection:</strong> Detected critical PRB utilization (94%) and 38% throughput collapse on n78 band cell CELL-17.</div>
+            <div class="cot-step">2. <strong>Regulatory & Evidence Mapping:</strong> Referenced 3GPP TS 23.501 architecture specs regarding cell traffic steering and load balancing.</div>
+            <div class="cot-step">3. <strong>Operational Reasoning:</strong> Power increase could restore local throughput, but is subject to strict airspace safety approval. Recommends offloading to neighbouring cell.</div>
+          </div>
+
+          <!-- Airspace Safety COT -->
+          <div class="cot-container">
+            <div class="cot-title">Airspace Safety Agent Logic Flow</div>
+            <div class="cot-step">1. <strong>Geometry Calculation:</strong> Aircraft SYN123 on ILS CAT II approach at 450 ft AGL. 3D slant distance to base station is 957.5 meters.</div>
+            <div class="cot-step">2. <strong>Threshold Verification:</strong> ICAO Annex 10 requires mandatory 6 dB margin (CLM-106) over radar altimeter tolerance mask (-82 dBW/m²/MHz).</div>
+            <div class="cot-step">3. <strong>Margin Simulation:</strong> Simulated received PFD is -38.6 dBW/m²/MHz; calculated margin is +42.1 dB under standard 62 dBm transmission.</div>
+            <div class="cot-step">4. <strong>Precautionary Guard:</strong> Power boost (+3 dB) rejected because aircraft radar altimeter tolerance category is unknown.</div>
+          </div>
+
+          <!-- Spectrum COT -->
+          <div class="cot-container">
+            <div class="cot-title">Spectrum Agent Logic Flow</div>
+            <div class="cot-step">1. <strong>Licensing Inspection:</strong> Cell operates within Indian authorized band (3300–3670 MHz; CLM-130).</div>
+            <div class="cot-step">2. <strong>Boundary Analysis:</strong> Candidate ACT-4 proposes activating 4100 MHz. This violates national licensing and abuts protected 4200–4400 MHz band (ITU RR 5.438).</div>
+            <div class="cot-step">3. <strong>Enforcement:</strong> Marked ACT-4 as critical violation under CON-INT-001 and CON-INT-004.</div>
+          </div>
+
+          <!-- Policy COT -->
+          <div class="cot-container">
+            <div class="cot-title">Policy Institutional Agent Logic Flow</div>
+            <div class="cot-step">1. <strong>Temporal Check:</strong> DGCA AIC 19/2025 carries effective date of 2027-12-31. As of 2026-10-07, it is classified as NOT_YET_IN_FORCE.</div>
+            <div class="cot-step">2. <strong>Institutional Authorization:</strong> Dynamic cellular power increases in India require human licensee coordination (CON-IN-004).</div>
+            <div class="cot-step">3. <strong>Policy Gap Alert:</strong> Identified GAP-006 (lack of published exclusion distance around runway). Applied precautionary principle.</div>
+          </div>
+
+          <!-- Optimization & Arbitration COT -->
+          <div class="cot-container">
+            <div class="cot-title">Arbitration & Decision Logic Flow</div>
+            <div class="cot-step">1. <strong>Deterministic Filtering:</strong> Python code evaluated all 4 candidate actions against constraints.json.</div>
+            <div class="cot-step">2. <strong>Rejections:</strong> ACT-1 rejected (CON-INT-003 safety buffer, CON-IN-004 human authorization); ACT-4 rejected (CON-INT-001, CON-INT-004).</div>
+            <div class="cot-step">3. <strong>Selected Action:</strong> ACT-2 (traffic steering to cell >1200 m) passed all checks with 0 dB increase in runway RF emissions. Accepted as preferred mitigation.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: Interactive Agent Planning Graph -->
+    <div id="tabGraph" class="tab-pane">
+      <div class="graph-canvas-container">
+        <h3 style="font-size:1.1rem; color:var(--navy-dark); margin-bottom:6px;">Multi-Agent Planning & Decision Pipeline</h3>
+        <p style="font-size:0.84rem; color:var(--navy-muted); margin-bottom:20px;">
+          Visual representation of sensor telemetry, autonomous agent evaluations, deterministic constraint checks, and final arbitration.
+        </p>
+
+        <!-- Clean SVG Pipeline Flow Diagram -->
+        <svg class="graph-svg" viewBox="0 0 900 420">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#90a4ae"/>
+            </marker>
+            <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+              <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#102a43" flood-opacity="0.08"/>
+            </filter>
+          </defs>
+
+          <!-- Level 1: Telemetry Input -->
+          <g class="svg-node" transform="translate(40, 160)">
+            <rect width="180" height="90" rx="8" fill="#e3f2fd" stroke="#90caf9" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="90" y="36" text-anchor="middle" font-weight="700" font-size="13" fill="#1565c0">Flight & 5G Telemetry</text>
+            <text x="90" y="56" text-anchor="middle" font-size="11" fill="#455a64">CAT II Approach (450 ft)</text>
+            <text x="90" y="72" text-anchor="middle" font-size="11" fill="#455a64">94% PRB Congestion</text>
+          </g>
+
+          <!-- Connections L1 to L2 -->
+          <line x1="220" y1="205" x2="300" y2="75" stroke="#90a4ae" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <line x1="220" y1="205" x2="300" y2="160" stroke="#90a4ae" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <line x1="220" y1="205" x2="300" y2="250" stroke="#90a4ae" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <line x1="220" y1="205" x2="300" y2="335" stroke="#90a4ae" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+          <!-- Level 2: 4 Domain Agents -->
+          <!-- Network -->
+          <g class="svg-node" transform="translate(300, 35)">
+            <rect width="170" height="70" rx="8" fill="#ffffff" stroke="#bbdefb" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="85" y="32" text-anchor="middle" font-weight="700" font-size="12" fill="#102a43">Network Agent</text>
+            <text x="85" y="50" text-anchor="middle" font-size="10" fill="#627d98">QoS & PRB Recovery</text>
+          </g>
+
+          <!-- Airspace Safety -->
+          <g class="svg-node" transform="translate(300, 125)">
+            <rect width="170" height="70" rx="8" fill="#ffffff" stroke="#bbf7d0" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="85" y="32" text-anchor="middle" font-weight="700" font-size="12" fill="#102a43">Airspace Safety Agent</text>
+            <text x="85" y="50" text-anchor="middle" font-size="10" fill="#047857">PFD & 6 dB Margin</text>
+          </g>
+
+          <!-- Spectrum -->
+          <g class="svg-node" transform="translate(300, 215)">
+            <rect width="170" height="70" rx="8" fill="#ffffff" stroke="#e9d5ff" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="85" y="32" text-anchor="middle" font-weight="700" font-size="12" fill="#102a43">Spectrum Agent</text>
+            <text x="85" y="50" text-anchor="middle" font-size="10" fill="#6b21a8">RR 5.438 / 4.2 GHz Boundary</text>
+          </g>
+
+          <!-- Policy -->
+          <g class="svg-node" transform="translate(300, 305)">
+            <rect width="170" height="70" rx="8" fill="#ffffff" stroke="#fed7aa" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="85" y="32" text-anchor="middle" font-weight="700" font-size="12" fill="#102a43">Policy Agent</text>
+            <text x="85" y="50" text-anchor="middle" font-size="10" fill="#c2410c">AIC 19/2025 (Not in force)</text>
+          </g>
+
+          <!-- Connections L2 to Optimization -->
+          <line x1="470" y1="70" x2="540" y2="180" stroke="#90a4ae" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <line x1="470" y1="160" x2="540" y2="195" stroke="#90a4ae" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <line x1="470" y1="250" x2="540" y2="215" stroke="#90a4ae" stroke-width="1.5" marker-end="url(#arrow)"/>
+          <line x1="470" y1="340" x2="540" y2="230" stroke="#90a4ae" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+          <!-- Level 3: Optimization & Pareto Trade-off -->
+          <g class="svg-node" transform="translate(540, 165)">
+            <rect width="160" height="80" rx="8" fill="#fcfbf7" stroke="#cbd5e1" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="80" y="35" text-anchor="middle" font-weight="700" font-size="12" fill="#102a43">Optimization Agent</text>
+            <text x="80" y="52" text-anchor="middle" font-size="10" fill="#475569">Pareto Trade-Off Ranking</text>
+            <text x="80" y="66" text-anchor="middle" font-size="9" fill="#0284c7">Ranks ACT-2 as Preferred</text>
+          </g>
+
+          <!-- Connection to Arbitration -->
+          <line x1="700" y1="205" x2="750" y2="205" stroke="#90a4ae" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+          <!-- Level 4: Arbitration & Deterministic Checks -->
+          <g class="svg-node" transform="translate(750, 150)">
+            <rect width="140" height="110" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="2" filter="url(#shadow)"/>
+            <text x="70" y="32" text-anchor="middle" font-weight="700" font-size="12" fill="#166534">Arbitration</text>
+            <text x="70" y="50" text-anchor="middle" font-size="10" fill="#15803d">Hard Rules Enforced</text>
+            <text x="70" y="74" text-anchor="middle" font-weight="700" font-size="11" fill="#065f46">ACT-2 ACCEPTED</text>
+            <text x="70" y="92" text-anchor="middle" font-size="9" fill="#dc2626">ACT-1 & 4 REJECTED</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- TAB 4: Regulatory Ledger -->
+    <div id="tabLedger" class="tab-pane">
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">Deterministic Constraint Verification Ledger</span>
+          <span style="font-size:0.8rem; color:var(--navy-muted)">Enforced purely in Python code — LLMs cannot override</span>
+        </div>
+
+        <table class="clean-table">
+          <thead>
+            <tr>
+              <th>Rule Code</th>
+              <th>Requirement Title</th>
+              <th>Authority Type</th>
+              <th>Evaluated Action</th>
+              <th>Outcome</th>
+              <th>Deterministic Verification Reason</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>CON-INT-001</strong></td>
+              <td>Radio Altimeter Band Exclusivity (4.2–4.4 GHz)</td>
+              <td><span style="color:#6b21a8; font-weight:600">HARD</span></td>
+              <td>ACT-4 (4100 MHz)</td>
+              <td><span class="status-pill status-fail">FAIL</span></td>
+              <td>Proposed carrier abuts protected aeronautical radionavigation band (ITU RR 5.438 / CLM-140)</td>
+            </tr>
+            <tr>
+              <td><strong>CON-INT-004</strong></td>
+              <td>National Spectrum Licensing Scope</td>
+              <td><span style="color:#6b21a8; font-weight:600">HARD</span></td>
+              <td>ACT-4 (4100 MHz)</td>
+              <td><span class="status-pill status-fail">FAIL</span></td>
+              <td>4100 MHz is outside licensed C-band allocation in India (3300–3670 MHz; CLM-130)</td>
+            </tr>
+            <tr>
+              <td><strong>CON-INT-003</strong></td>
+              <td>Mandatory 6 dB Airspace Safety Margin</td>
+              <td><span style="color:#6b21a8; font-weight:600">HARD</span></td>
+              <td>ACT-1 (+3 dB Power)</td>
+              <td><span class="status-pill status-fail">FAIL</span></td>
+              <td>Power boost in runway corridor cannot guarantee safety margin buffer under conservative ITM mask</td>
+            </tr>
+            <tr>
+              <td><strong>CON-IN-004</strong></td>
+              <td>Human Authorization for Dynamic Changes</td>
+              <td><span style="color:#b45309; font-weight:600">ADVISORY</span></td>
+              <td>ACT-1 (+3 dB Power)</td>
+              <td><span class="status-pill status-fail">FAIL</span></td>
+              <td>Dynamic network modifications that increase RF emissions require licensee authorization in India</td>
+            </tr>
+            <tr>
+              <td><strong>CON-IN-002</strong></td>
+              <td>DGCA AIC 19/2025 Compliance</td>
+              <td><span style="color:#6b21a8; font-weight:600">HARD</span></td>
+              <td>ACT-2 (Traffic Steering)</td>
+              <td><span class="status-pill status-pass">PASS</span></td>
+              <td>AIC 19/2025 has effective date 2027-12-31; classified as NOT_YET_IN_FORCE as of 2026-10-07</td>
+            </tr>
+            <tr>
+              <td><strong>CON-INT-003</strong></td>
+              <td>Safety Margin Preservation</td>
+              <td><span style="color:#6b21a8; font-weight:600">HARD</span></td>
+              <td>ACT-2 (Traffic Steering)</td>
+              <td><span class="status-pill status-pass">PASS</span></td>
+              <td>Steers congestion to cell >1200 m away; produces zero increase in emissions over approach path</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <!-- Entity Hover Popover -->
+  <div id="hoverPopover">
+    <div class="pop-header" id="popTitle">Title</div>
+    <div class="pop-badge" id="popBadge">Category</div>
+    <div class="pop-body" id="popSummary">Summary description...</div>
+    <div class="pop-meta" id="popMeta">Source: Primary Standard</div>
+  </div>
+
+  <script>
+    // Knowledge Base Dictionary cache
+    let kbDict = null;
+
+    async function loadDictionary() {
+      try {
+        const res = await fetch('/api/kb/dictionary');
+        if (res.ok) {
+          kbDict = await res.json();
+        }
+      } catch (e) {
+        console.warn('Could not load KB dictionary:', e);
+      }
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      
+      const targetPane = document.getElementById(tabId);
+      if (targetPane) targetPane.classList.add('active');
+
+      const tabs = {
+        'tabOverview': 0,
+        'tabAgents': 1,
+        'tabGraph': 2,
+        'tabLedger': 3
+      };
+      const btns = document.querySelectorAll('.tab-btn');
+      if (btns[tabs[tabId]]) btns[tabs[tabId]].classList.add('active');
+    }
+
+    function recalcGeometry() {
+      const h_agl = parseFloat(document.getElementById('cfgAircraftH').value) || 450;
+      const dist_m = parseFloat(document.getElementById('cfgCellDist').value) || 900;
+      const lat_m = parseFloat(document.getElementById('cfgCellLat').value) || 300;
+
+      const aircraft_h_m = h_agl * 0.3048;
+      const cell_h_m = 30.0;
+      const vert = Math.abs(aircraft_h_m - cell_h_m);
+      const horiz = Math.sqrt(dist_m * dist_m + lat_m * lat_m);
+      const slant = Math.sqrt(vert * vert + horiz * horiz);
+
+      document.getElementById('dispSlantDist').textContent = slant.toFixed(1) + ' m';
+
+      const spreading = 10 * Math.log10(4 * Math.PI * slant * slant);
+      const pfd = 32.0 - spreading;
+      document.getElementById('dispPfd').textContent = pfd.toFixed(1) + ' dBW/m²/MHz';
+
+      const margin = 9.5 - (pfd + 6.0);
+      document.getElementById('dispMargin').textContent = (margin > 0 ? '+' : '') + margin.toFixed(1) + ' dB';
+    }
+
+    async function runArbitration() {
+      const btn = document.getElementById('btnExecuteRun');
+      btn.disabled = true;
+      btn.innerHTML = 'Arbitrating Across Agents...';
+
+      try {
+        const res = await fetch('/api/run', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            as_of: "2026-10-07"
+          })
+        });
+        const data = await res.json();
+
+        // Update Decision Banner
+        if (data.arbitration && data.arbitration.accepted_action) {
+          const act = data.arbitration.accepted_action;
+          document.getElementById('decisionTitleText').textContent = act.id + ': ' + (act.desc || 'Steer traffic to neighbouring cell');
+          document.getElementById('decisionVerdictPill').textContent = act.verdict || 'ACCEPT_PREFERRED';
+          document.getElementById('decisionDescText').textContent = data.arbitration.rationale || 'Mitigation accepted based on deterministic constraints.';
+        }
+
+        // Update agent statements if present
+        if (data.agent_reports) {
+          if (data.agent_reports.network) document.getElementById('netStatement').textContent = data.agent_reports.network.assessment;
+          if (data.agent_reports.airspace_safety) document.getElementById('safetyStatement').textContent = data.agent_reports.airspace_safety.assessment;
+          if (data.agent_reports.spectrum) document.getElementById('specStatement').textContent = data.agent_reports.spectrum.assessment;
+          if (data.agent_reports.policy_institutional) document.getElementById('policyStatement').textContent = data.agent_reports.policy_institutional.assessment;
+          if (data.agent_reports.optimization) document.getElementById('optStatement').textContent = data.agent_reports.optimization.assessment;
+        }
+      } catch (err) {
+        console.error('Run failed:', err);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg> Execute Coexistence Run`;
+      }
+    }
+
+    // Hover Card Logic
+    const popover = document.getElementById('hoverPopover');
+
+    function showEntityCard(code, event) {
+      if (!kbDict) return;
+
+      let entity = null;
+      let category = "Regulatory Knowledge";
+
+      if (code.startsWith('CLM-') && kbDict.claims && kbDict.claims[code]) {
+        entity = kbDict.claims[code];
+        category = "Aviation / Telecom Claim";
+      } else if (code.startsWith('CON-') && kbDict.constraints && kbDict.constraints[code]) {
+        entity = kbDict.constraints[code];
+        category = "Deterministic Constraint (" + entity.type + ")";
+      } else if (code.startsWith('CONF-') && kbDict.conflicts && kbDict.conflicts[code]) {
+        entity = kbDict.conflicts[code];
+        category = "Documented Evidence Conflict";
+      } else if (code.startsWith('GAP-') && kbDict.gaps && kbDict.gaps[code]) {
+        entity = kbDict.gaps[code];
+        category = "Regulatory Policy Gap";
+      } else if (code.startsWith('ACT-') && kbDict.actions && kbDict.actions[code]) {
+        entity = kbDict.actions[code];
+        category = "Mitigation Option (" + entity.category + ")";
+      }
+
+      if (!entity) return;
+
+      document.getElementById('popTitle').textContent = entity.title || code;
+      document.getElementById('popBadge').textContent = category;
+      document.getElementById('popSummary').textContent = entity.summary || entity.rule || entity.description || "";
+      document.getElementById('popMeta').textContent = entity.authority ? `Authority: ${entity.authority}` : (entity.legal_status ? `Status: ${entity.legal_status}` : code);
+
+      const rect = event.target.getBoundingClientRect();
+      popover.style.left = (rect.left + window.scrollX) + 'px';
+      popover.style.top = (rect.bottom + window.scrollY + 6) + 'px';
+      popover.style.display = 'block';
+    }
+
+    function hideEntityCard() {
+      popover.style.display = 'none';
+    }
+
+    // Startup
+    loadDictionary();
+    recalcGeometry();
+  </script>
+</body>
+</html>

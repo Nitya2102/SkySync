@@ -1,0 +1,50 @@
+[
+  {
+    "query": "radio altimeter safety margin 6 dB ICAO recommendation",
+    "expected_claims": ["CLM-106"],
+    "jurisdiction": "international",
+    "agent": "airspace_safety"
+  },
+  {
+    "query": "FAA compatibility table dual-pol 62 EIRP 35 ft adjacent inband spurious",
+    "expected_claims": ["CLM-109"],
+    "jurisdiction": "US",
+    "agent": "airspace_safety"
+  },
+  {
+    "query": "DGCA AIC 19/2025 compliance effective date India",
+    "expected_claims": ["CLM-131"],
+    "jurisdiction": "India",
+    "agent": "policy_institutional"
+  },
+  {
+    "query": "Radio Regulations 4200 4400 MHz aeronautical radionavigation exclusivity",
+    "expected_claims": ["CLM-140"],
+    "jurisdiction": "international",
+    "agent": "spectrum"
+  },
+  {
+    "query": "ECC 362 separation distance 1200 m threshold runway lateral",
+    "expected_claims": ["CLM-151"],
+    "jurisdiction": "international",
+    "agent": "optimization"
+  },
+  {
+    "query": "3GPP TS 23.501 system architecture 5G System",
+    "expected_claims": ["CLM-008"],
+    "jurisdiction": "international",
+    "agent": "network"
+  },
+  {
+    "query": "spurious emission conducted -46 dBm EIRP -28.4 max gain",
+    "expected_claims": ["CLM-110"],
+    "jurisdiction": "US",
+    "agent": "spectrum"
+  },
+  {
+    "query": "minimum separation distance MSD 35 ft 500 ft AGL",
+    "expected_claims": ["CLM-107"],
+    "jurisdiction": "US",
+    "agent": "airspace_safety"
+  }
+]

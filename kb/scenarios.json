@@ -1,0 +1,158 @@
+[
+  {
+    "scenario_id": "DEMO-001",
+    "name": "Scenario 1: Final Approach Congestion Offload (India)",
+    "description": "Aircraft on ILS CAT II approach at 450 ft AGL. 5G cell at 900 m has critical 94% PRB congestion. Evaluates off-corridor traffic steering vs power boost.",
+    "expected_verdict": "ACCEPT_PREFERRED (ACT-2: Traffic Steering >1200 m)",
+    "key_learning": "Demonstrates hard constraint rejection of power escalation (CON-INT-003, CON-IN-004) and recognition that DGCA AIC 19/2025 is NOT_YET_IN_FORCE.",
+    "as_of": "2026-10-07",
+    "simulation_state": {
+      "jurisdiction": "India",
+      "airport": "SYNTHETIC-AIRPORT-A",
+      "cell": {
+        "id": "CELL-17",
+        "band": "n78",
+        "carrier_mhz": [3300, 3670],
+        "prb_util_pct": 94,
+        "throughput_drop_pct": 38,
+        "tx_power_dbm_per_mhz": null,
+        "height_m": 30,
+        "distance_to_runway_threshold_m": 900,
+        "lateral_offset_m": 300
+      },
+      "aircraft": {
+        "callsign": "SYN123",
+        "phase": "final_approach",
+        "height_agl_ft": 450,
+        "ra_tolerant": "unknown",
+        "approach": "ILS CAT II"
+      }
+    },
+    "candidate_actions": [
+      {
+        "id": "ACT-1",
+        "desc": "Raise cell power +3 dB for QoS recovery",
+        "action_type": "power_change",
+        "parameters": {"power_delta_db": 3.0}
+      },
+      {
+        "id": "ACT-2",
+        "desc": "Steer traffic to neighbouring cell >1200 m from threshold",
+        "action_type": "traffic_steering",
+        "parameters": {"min_distance_m": 1200.0}
+      },
+      {
+        "id": "ACT-3",
+        "desc": "Downtilt 3 deg + cap PRB-based power",
+        "action_type": "downtilt",
+        "parameters": {"downtilt_delta_deg": 3.0}
+      },
+      {
+        "id": "ACT-4",
+        "desc": "Activate unused carrier at 4100 MHz (n77)",
+        "action_type": "carrier_change",
+        "parameters": {"carrier_mhz": 4100.0}
+      }
+    ]
+  },
+  {
+    "scenario_id": "DEMO-002",
+    "name": "Scenario 2: Low-Altitude Flare Encroachment (Beam Shaping)",
+    "description": "Aircraft on short touchdown flare at 50 ft AGL. Cell is located only 350 m from runway threshold at 35 m height. Requires physical antenna beam tilting to avoid altimeter saturation.",
+    "expected_verdict": "ACCEPT_IF_MARGIN / ACCEPT_PREFERRED (ACT-3: Antenna Downtilt 4°)",
+    "key_learning": "Exercises physical MarginSimulator calculations (CLM-109), mechanically tilting antenna boresight downward to restore an otherwise deficient safety margin to +7.2 dB.",
+    "as_of": "2026-10-07",
+    "simulation_state": {
+      "jurisdiction": "International",
+      "airport": "METRO-RUNWAY-27R",
+      "cell": {
+        "id": "CELL-APPROACH-01",
+        "band": "n78",
+        "carrier_mhz": [3400, 3600],
+        "prb_util_pct": 82,
+        "throughput_drop_pct": 24,
+        "tx_power_dbm_per_mhz": 62.0,
+        "height_m": 35,
+        "distance_to_runway_threshold_m": 350,
+        "lateral_offset_m": 120
+      },
+      "aircraft": {
+        "callsign": "AERO-402",
+        "phase": "landing_flare",
+        "height_agl_ft": 50,
+        "ra_tolerant": "tolerant",
+        "approach": "ILS CAT I"
+      }
+    },
+    "candidate_actions": [
+      {
+        "id": "ACT-1",
+        "desc": "Raise cell power +3 dB to overcome urban building penetration",
+        "action_type": "power_change",
+        "parameters": {"power_delta_db": 3.0}
+      },
+      {
+        "id": "ACT-3",
+        "desc": "Apply 4° mechanical antenna downtilt + 20% PRB power cap",
+        "action_type": "downtilt",
+        "parameters": {"downtilt_delta_deg": 4.0, "cap_prb_power": true}
+      },
+      {
+        "id": "ACT-4",
+        "desc": "Retune carrier to 4150 MHz to avoid adjacent C-band interference",
+        "action_type": "carrier_change",
+        "parameters": {"carrier_mhz": 4150.0}
+      }
+    ]
+  },
+  {
+    "scenario_id": "DEMO-003",
+    "name": "Scenario 3: Zero-Visibility CAT III / Legacy Aircraft (Escalate)",
+    "description": "Dense fog zero-visibility autoland at US Hub Airport. Aircraft is a regional jet with an unverified legacy Group 4 radar altimeter under FAA AD 2023-12-12. High safety uncertainty.",
+    "expected_verdict": "ESCALATE / REQUIRE_HUMAN_APPROVAL (Precautionary Safety Stop)",
+    "key_learning": "Demonstrates the precautionary principle (Rule 7) under severe safety risk and preserves documented conflict CONF-001 without averaging.",
+    "as_of": "2026-10-07",
+    "simulation_state": {
+      "jurisdiction": "US",
+      "airport": "JFK-INTERNATIONAL",
+      "cell": {
+        "id": "CELL-JFK-12",
+        "band": "n77",
+        "carrier_mhz": [3700, 3980],
+        "prb_util_pct": 98,
+        "throughput_drop_pct": 45,
+        "tx_power_dbm_per_mhz": 65.0,
+        "height_m": 45,
+        "distance_to_runway_threshold_m": 500,
+        "lateral_offset_m": 150
+      },
+      "aircraft": {
+        "callsign": "REGIONAL-88",
+        "phase": "cat_iii_autoland",
+        "height_agl_ft": 100,
+        "ra_tolerant": "non_tolerant",
+        "approach": "ILS CAT III Autoland"
+      }
+    },
+    "candidate_actions": [
+      {
+        "id": "ACT-1",
+        "desc": "Emergency power boost +4 dB to maintain airport terminal connectivity",
+        "action_type": "power_change",
+        "parameters": {"power_delta_db": 4.0}
+      },
+      {
+        "id": "ACT-5",
+        "desc": "Freeze dynamic emission changes & escalate to human ATC / Network Coordinator",
+        "action_type": "human_escalation",
+        "parameters": {"requires_human_approval": true}
+      },
+      {
+        "id": "ACT-4",
+        "desc": "Shift carrier to 4120 MHz (adjacent to FSS guard band)",
+        "action_type": "carrier_change",
+        "parameters": {"carrier_mhz": 4120.0}
+      }
+    ]
+  }
+]

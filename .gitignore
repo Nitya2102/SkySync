@@ -1,0 +1,42 @@
+# Environments and Secrets
+.env
+.env.local
+*.env
+!.env.example
+
+# Python
+.venv/
+venv/
+ENV/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.pytest_cache/
+.pytest_cache/
+
+# Node / Frontend
+frontend/node_modules/
+frontend/.output/
+frontend/.wrangler/
+frontend/.lovable/
+node_modules/
+dist/
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Archives
+*.zip
+
+# Test and run artifacts (keep demo baselines if desired, ignore transient logs)
+runs/run_[0-9a-zA-Z][0-9a-zA-Z]*.json
+runs/test_*.json
+!runs/run_demo-001.json
+!runs/run_demo-002.json
+!runs/run_demo-003.json

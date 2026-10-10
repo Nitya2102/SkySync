@@ -1,0 +1,23 @@
+{
+ "name": "5G-Airspace-Coexistence-Safety-KB",
+ "version": "3.0",
+ "built": "2026-10-07",
+ "as_of": "2026-10-07",
+ "source_count": 53,
+ "claim_count": 89,
+ "new_claims_v3": 47,
+ "legacy_claims": 42,
+ "rag_chunk_count": 30,
+ "constraint_count": 14,
+ "conflict_count": 5,
+ "policy_gap_count": 14,
+ "verification_breakdown": {
+  "legacy_metadata_unrechecked": 40,
+  "superseded_by_fetched_primary": 2,
+  "fetched_full_text_primary": 25,
+  "search_snippet_primary": 19,
+  "secondary_report": 3
+ },
+ "freshness_note": "Contains FAA final rule (signed 2026-07-24) and FCC Upper C-band parameters as described therein; India AIC 19/2025 effective date 2027-12-31 captured. Temporal logic is mandatory: check legal_status/effective_from against as_of.",
+ "known_limits": "ICAO/NACC PDFs blocked by site; FCC R&O, NFAP-2025 body, Telecom Act text, ITU-R M.2059 numbers, TS 23.501/23.502 clause text NOT ingested. See policy_gaps GAP-006..010."
+}

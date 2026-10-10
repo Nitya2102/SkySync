@@ -1,0 +1,228 @@
+{
+ "nodes": [
+  {
+   "id": "INST-DOT-WPC",
+   "type": "Institution",
+   "label": "DoT / Wireless Planning & Coordination Wing",
+   "jurisdiction": "India",
+   "evidence_claims": [
+    "CLM-032",
+    "CLM-033",
+    "CLM-034"
+   ]
+  },
+  {
+   "id": "INST-DGCA",
+   "type": "Institution",
+   "label": "DGCA (aviation safety regulator)",
+   "jurisdiction": "India",
+   "evidence_claims": [
+    "CLM-130"
+   ]
+  },
+  {
+   "id": "INST-AAI",
+   "type": "Institution",
+   "label": "Airports Authority of India (AIM/ANSP, publishes AIC)",
+   "jurisdiction": "India",
+   "evidence_claims": [
+    "CLM-130"
+   ]
+  },
+  {
+   "id": "INST-COAI",
+   "type": "Stakeholder",
+   "label": "COAI (operators' body, advocacy)",
+   "jurisdiction": "India",
+   "evidence_claims": [
+    "CLM-136"
+   ]
+  },
+  {
+   "id": "INST-FAA",
+   "type": "Institution",
+   "label": "FAA",
+   "jurisdiction": "US",
+   "evidence_claims": [
+    "CLM-103"
+   ]
+  },
+  {
+   "id": "INST-FCC",
+   "type": "Institution",
+   "label": "FCC",
+   "jurisdiction": "US",
+   "evidence_claims": [
+    "CLM-111",
+    "CLM-112"
+   ]
+  },
+  {
+   "id": "INST-RTCA-EUROCAE",
+   "type": "Standards body",
+   "label": "RTCA SC-239 / EUROCAE WG-119",
+   "jurisdiction": "US/EU",
+   "evidence_claims": [
+    "CLM-119"
+   ]
+  },
+  {
+   "id": "INST-EASA",
+   "type": "Institution",
+   "label": "EASA",
+   "jurisdiction": "EU",
+   "evidence_claims": [
+    "CLM-152"
+   ]
+  },
+  {
+   "id": "INST-CEPT-ECC",
+   "type": "Institution",
+   "label": "CEPT / ECC",
+   "jurisdiction": "Europe",
+   "evidence_claims": [
+    "CLM-150"
+   ]
+  },
+  {
+   "id": "INST-ICAO",
+   "type": "Institution",
+   "label": "ICAO (SARPs, FSMP, regional offices)",
+   "jurisdiction": "international",
+   "evidence_claims": [
+    "CLM-155"
+   ]
+  },
+  {
+   "id": "INST-ITU-R",
+   "type": "Institution",
+   "label": "ITU-R (Radio Regulations)",
+   "jurisdiction": "international",
+   "evidence_claims": [
+    "CLM-140",
+    "CLM-141"
+   ]
+  },
+  {
+   "id": "INST-3GPP",
+   "type": "Standards body",
+   "label": "3GPP",
+   "jurisdiction": "international",
+   "evidence_claims": [
+    "CLM-143"
+   ]
+  },
+  {
+   "id": "INST-TC",
+   "type": "Institution",
+   "label": "Transport Canada",
+   "jurisdiction": "Canada",
+   "evidence_claims": [
+    "CLM-156"
+   ]
+  }
+ ],
+ "edges": [
+  {
+   "source": "INST-DOT-WPC",
+   "relation": "RESPONSIBLE_FOR",
+   "target": "frequency assignment & spectrum regulation (India)",
+   "evidence_claims": [
+    "CLM-032",
+    "CLM-033"
+   ]
+  },
+  {
+   "source": "INST-DOT-WPC",
+   "relation": "COORDINATES_WITH",
+   "target": "ITU/international bodies",
+   "evidence_claims": [
+    "CLM-034"
+   ]
+  },
+  {
+   "source": "INST-DGCA",
+   "relation": "REGULATES",
+   "target": "RA-dependent aircraft operations in Indian airspace (AIC 19/2025)",
+   "evidence_claims": [
+    "CLM-131",
+    "CLM-132"
+   ]
+  },
+  {
+   "source": "INST-AAI",
+   "relation": "PUBLISHES",
+   "target": "AIC 19/2025",
+   "evidence_claims": [
+    "CLM-130"
+   ]
+  },
+  {
+   "source": "INST-FAA",
+   "relation": "REGULATES",
+   "target": "aircraft RA tolerance only (not RF environment)",
+   "evidence_claims": [
+    "CLM-103"
+   ]
+  },
+  {
+   "source": "INST-FCC",
+   "relation": "REGULATES",
+   "target": "wireless emissions/licensing incl. Upper C-band",
+   "evidence_claims": [
+    "CLM-111",
+    "CLM-112"
+   ]
+  },
+  {
+   "source": "INST-FAA",
+   "relation": "COORDINATES_WITH",
+   "target": "INST-FCC (aligned deadlines; FCC rebates)",
+   "evidence_claims": [
+    "CLM-102",
+    "CLM-114"
+   ]
+  },
+  {
+   "source": "INST-ITU-R",
+   "relation": "REGULATES",
+   "target": "RA band exclusivity (RR 5.438)",
+   "evidence_claims": [
+    "CLM-140"
+   ]
+  },
+  {
+   "source": "INST-EASA",
+   "relation": "ASSESSES",
+   "target": "ECC Report 362",
+   "evidence_claims": [
+    "CLM-152"
+   ]
+  },
+  {
+   "source": "INST-ICAO",
+   "relation": "ISSUES_GUIDANCE",
+   "target": "5G/RA safeguarding (state letter, MID guidance)",
+   "evidence_claims": [
+    "CLM-155"
+   ]
+  },
+  {
+   "source": "INST-RTCA-EUROCAE",
+   "relation": "DEVELOPS",
+   "target": "RA MOPS (expected 2027-03)",
+   "evidence_claims": [
+    "CLM-119"
+   ]
+  },
+  {
+   "source": "INST-DOT-WPC",
+   "relation": "COORDINATION_INTERFACE_UNDOCUMENTED",
+   "target": "INST-DGCA",
+   "evidence_claims": [
+    "CLM-032",
+    "CLM-130"
+   ]
+  }
+ ]
+}

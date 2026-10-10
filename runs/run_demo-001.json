@@ -1,0 +1,1412 @@
+{
+  "run_id": "run_demo-001",
+  "scenario_id": "DEMO-001",
+  "as_of": "2026-10-07",
+  "simulation_state": {
+    "jurisdiction": "India",
+    "airport": "SYNTHETIC-AIRPORT-A",
+    "cell": {
+      "id": "CELL-17",
+      "band": "n78",
+      "carrier_mhz": [
+        3300.0,
+        3670.0
+      ],
+      "prb_util_pct": 94.0,
+      "throughput_drop_pct": 38.0,
+      "tx_power_dbm_per_mhz": null,
+      "height_m": 30.0,
+      "distance_to_runway_threshold_m": 900.0,
+      "lateral_offset_m": 300.0
+    },
+    "aircraft": {
+      "callsign": "SYN123",
+      "phase": "final_approach",
+      "height_agl_ft": 450.0,
+      "ra_tolerant": "unknown",
+      "approach": "ILS CAT II"
+    }
+  },
+  "agent_reports": {
+    "network": {
+      "agent_name": "network",
+      "observation": "Cell CELL-17 exhibits severe capacity strain: Physical Resource Block (PRB) utilization stands at 94.0% with an aggregate user throughput degradation of 38.0%.",
+      "assessment": "PRB load exceeds the 85% congestion threshold, breaching standard user SLA QoS targets. To restore throughput, technical mitigation is required. Proposing candidate actions: ACT-1 (Raise cell power +3 dB for link recovery) and ACT-2 (Steer traffic to neighbouring cell >1200 m). Action ACT-2 is preferred from a coexistence standpoint to offload load without increasing RF emissions near the runway.",
+      "chain_of_thought": [
+        "1. KPI Assessment: Evaluated PRB utilization (94.0%) and throughput drop (38.0%). Identified cell edge congestion.",
+        "2. Standards Baseline: Checked 3GPP TS 23.501 and TS 38.300 QoS flow criteria (CLM-008, CLM-009).",
+        "3. Mitigation Formulation: Generated candidate actions ACT-1 (power increase) and ACT-2 (traffic steering).",
+        "4. Coordination Note: Flagged potential glideslope RF coupling for joint multi-agent arbitration review."
+      ],
+      "evidence_ids": [
+        "CLM-163",
+        "CLM-162",
+        "CLM-164"
+      ],
+      "constraints": [
+        "CON-INT-004"
+      ],
+      "candidate_actions": [
+        {
+          "id": "ACT-1",
+          "desc": "Raise cell power +3 dB for QoS recovery",
+          "action_type": "power_change",
+          "parameters": {
+            "power_delta_db": 3.0,
+            "new_eirp_dbm_mhz": 65.0
+          },
+          "score": null,
+          "verdict": null,
+          "rejection_reasons": [],
+          "evidence_ids": [],
+          "simulated_margin_db": null,
+          "margin_label": "SIMULATION"
+        },
+        {
+          "id": "ACT-2",
+          "desc": "Steer traffic to neighbouring cell >1200 m from threshold",
+          "action_type": "traffic_steering",
+          "parameters": {
+            "target_cell_id": "CELL-18",
+            "min_distance_m": 1200.0,
+            "fraction_moved": 0.3
+          },
+          "score": null,
+          "verdict": null,
+          "rejection_reasons": [],
+          "evidence_ids": [],
+          "simulated_margin_db": null,
+          "margin_label": "SIMULATION"
+        }
+      ],
+      "confidence": 0.9,
+      "uncertainty": "Uncertain if adjacent cell can absorb full handover volume without secondary congestion.",
+      "evidence_status": "sufficient",
+      "warnings": [],
+      "conflicts_cited": [],
+      "error": null
+    },
+    "airspace_safety": {
+      "agent_name": "airspace_safety",
+      "observation": "Aircraft SYN123 is in final_approach on ILS CAT II at 450 ft AGL. 5G Cell CELL-17 is 900 m from runway threshold (300 m lateral offset). 3D slant separation distance is 954.7 m.",
+      "assessment": "Simulated baseline altimeter margin is +42.1 dB (minimum 6.0 dB required under CLM-106). A dynamic power boost (+3 dB) reduces margin to +39.1 dB, which violates glide path safety. Antenna downtilt (3°) safely restores margin to +46.6 dB (SIMULATION) while preserving cell coverage.",
+      "chain_of_thought": [
+        "1. Telemetry Inspection: Aircraft SYN123 at 450 ft AGL, 3D separation 954.7 m from CELL-17.",
+        "2. PFD Simulation (CLM-109): Baseline margin = +42.1 dB; +3 dB boost drops margin to +39.1 dB.",
+        "3. Glideslope Safety Standard (CLM-106): Enforcing strict 6.0 dB margin floor. Power increases rejected; downtilt verified safe.",
+        "4. Precautionary Guard: Radar altimeter tolerance category is unverified; conservative baseline strictly maintained."
+      ],
+      "evidence_ids": [
+        "CLM-106",
+        "CLM-134",
+        "CLM-116",
+        "CLM-130"
+      ],
+      "constraints": [
+        "CON-INT-003",
+        "CON-INT-001"
+      ],
+      "candidate_actions": [
+        {
+          "id": "ACT-3",
+          "desc": "Downtilt 3 deg + cap PRB-based power",
+          "action_type": "downtilt",
+          "parameters": {
+            "downtilt_delta_deg": 3.0,
+            "cap_prb_power": true
+          },
+          "score": null,
+          "verdict": null,
+          "rejection_reasons": [],
+          "evidence_ids": [],
+          "simulated_margin_db": 46.59,
+          "margin_label": "SIMULATION"
+        }
+      ],
+      "confidence": 0.94,
+      "uncertainty": "Aircraft radar altimeter tolerance is unverified; conservative baseline applied.",
+      "evidence_status": "sufficient",
+      "warnings": [
+        "Aircraft RA tolerance is unverified: using precautionary 6 dB limit",
+        "CON-IN-002 is NOT_YET_IN_FORCE (effective 2027-12-31)",
+        "CON-IN-004 legal status is inference"
+      ],
+      "conflicts_cited": [
+        "CONF-002",
+        "CONF-003"
+      ],
+      "error": null
+    },
+    "spectrum": {
+      "agent_name": "spectrum",
+      "observation": "5G Cell CELL-17 operates in band n78 with carriers 3300–3670 MHz. In India, the authorized mid-band 5G spectrum is 3300–3670 MHz under CON-INT-004.",
+      "assessment": "Active band n78 (3300–3670 MHz) complies with national licensing. However, candidate retuning to 4100 MHz (n77) is strictly prohibited: it violates national frequency license CON-INT-004 and abuts the globally protected 4200–4400 MHz aeronautical radionavigation band governed by ITU RR 5.438 (CLM-140). Mandatory 530 MHz separation to radar altimeter band must be strictly preserved.",
+      "chain_of_thought": [
+        "1. Spectrum Allocation Check: Verified active carriers 3300–3670 MHz within licensed band in India (3300–3670 MHz).",
+        "2. Aeronautical Protection: Checked ITU Radio Regulations RR 5.438 and CLM-140; 4200–4400 MHz band has strict exclusive aeronautical allocation.",
+        "3. Out-of-Band Emission Review: Enforced CON-INT-001 and CON-INT-004. Proposed 4100 MHz operation flagged as severe non-compliance.",
+        "4. Verdict: Authorized n78 operation permitted; 4100 MHz retuning rejected."
+      ],
+      "evidence_ids": [
+        "CLM-140",
+        "CLM-143",
+        "CLM-144"
+      ],
+      "constraints": [
+        "CON-INT-001",
+        "CON-INT-004"
+      ],
+      "candidate_actions": [
+        {
+          "id": "ACT-4",
+          "desc": "Activate unused carrier at 4100 MHz (n77)",
+          "action_type": "carrier_change",
+          "parameters": {
+            "carrier_mhz": 4100.0
+          },
+          "score": null,
+          "verdict": null,
+          "rejection_reasons": [],
+          "evidence_ids": [],
+          "simulated_margin_db": null,
+          "margin_label": "SIMULATION"
+        }
+      ],
+      "confidence": 0.95,
+      "uncertainty": "Exact manufacturer spurious emission filter rolloff curve for cell site gNodeB is unverified.",
+      "evidence_status": "sufficient",
+      "warnings": [
+        "4100 MHz operation violates both national license and proximity boundary",
+        "CON-IN-004 legal status is inference"
+      ],
+      "conflicts_cited": [],
+      "error": null
+    },
+    "policy_institutional": {
+      "agent_name": "policy_institutional",
+      "observation": "Scenario jurisdiction is India evaluated as of 2026-10-07. Regulatory authorities include DGCA, Ministry of Civil Aviation, and DoT/WPC. Key instruments identified: DGCA AIC 19/2025 and 5G band licensing conditions.",
+      "assessment": "DGCA AIC 19/2025 (CLM-131) has an effective date of 2027-12-31, which is in the future relative to 2026-10-07; it is classified strictly as NOT_YET_IN_FORCE. Under institutional rule CON-IN-004, automated cell reconfigurations that increase emissions near an aerodrome require human ATC / coordinator authorization. Furthermore, GAP-006 notes the absence of numeric runway buffer coordinates in primary circulars, mandating precautionary defaults.",
+      "chain_of_thought": [
+        "1. Temporal Status Audit: Compared as-of date 2026-10-07 against DGCA AIC 19/2025 effective date (2027-12-31). Formally marked NOT_YET_IN_FORCE.",
+        "2. Institutional Authorization (CON-IN-004): Automated RF power boosts near runway approach corridors require human oversight.",
+        "3. Policy Gap Identification (GAP-006): Primary circulars lack published numeric exclusion contours around runway thresholds. Precautionary boundary enforced.",
+        "4. Verdict: Dynamic power increases require human authorization gate; off-corridor traffic steering (ACT-2) and downtilt (ACT-3) comply with institutional mandates."
+      ],
+      "evidence_ids": [
+        "CLM-131",
+        "CLM-130",
+        "CLM-134"
+      ],
+      "constraints": [
+        "CON-IN-002",
+        "CON-IN-003",
+        "CON-IN-004"
+      ],
+      "candidate_actions": [],
+      "confidence": 0.88,
+      "uncertainty": "GAP-006: Lack of published numeric exclusion radius around synthetic airport runways in primary circulars.",
+      "evidence_status": "sufficient",
+      "warnings": [
+        "DGCA AIC 19/2025 is NOT_YET_IN_FORCE as of 2026-10-07",
+        "CON-IN-002 is NOT_YET_IN_FORCE (effective 2027-12-31)",
+        "CON-IN-004 legal status is inference",
+        "CON-IN-003 legal status is evidence_gap"
+      ],
+      "conflicts_cited": [],
+      "error": null
+    },
+    "optimization": {
+      "agent_name": "optimization",
+      "observation": "Pareto frontier analysis across Airspace Safety Margin, Cellular Throughput, and Regulatory Compliance.",
+      "assessment": "Multi-objective Pareto evaluation identifies Off-Corridor Traffic Steering (ACT-2) as strictly dominant: it relieves 30% PRB congestion by offloading users to CELL-18 (>1200 m away) with 0.0 dB increase in runway emissions.",
+      "chain_of_thought": [
+        "1. Multi-Objective Formulation: Mapped candidate actions onto 4 objective dimensions (Airspace Margin, PRB Relief, License Compliance, Latency).",
+        "2. Geometry & Flight Phase: Aircraft in final_approach at 450 ft AGL, cell at 900 m.",
+        "3. Pareto Dominance Evaluation: ACT-2 achieves 0.92 aggregate score; eliminates glideslope interference while recovering QoS.",
+        "4. Selection Recommendation: Forwarded ACT-2 as primary preference to arbitration agent."
+      ],
+      "evidence_ids": [
+        "CLM-164",
+        "CLM-162",
+        "CLM-163"
+      ],
+      "constraints": [
+        "CON-INT-003"
+      ],
+      "candidate_actions": [
+        {
+          "id": "ACT-2",
+          "desc": "Steer traffic to neighbouring cell >1200 m from threshold",
+          "action_type": "traffic_steering",
+          "parameters": {
+            "target_cell_id": "CELL-18",
+            "min_distance_m": 1200.0,
+            "fraction_moved": 0.3
+          },
+          "score": null,
+          "verdict": null,
+          "rejection_reasons": [],
+          "evidence_ids": [],
+          "simulated_margin_db": null,
+          "margin_label": "SIMULATION"
+        }
+      ],
+      "confidence": 0.92,
+      "uncertainty": "Potential handover signaling overhead during peak load burst.",
+      "evidence_status": "sufficient",
+      "warnings": [
+        "ECC 362 separation distance (CLM-151) applied as supporting analogy only"
+      ],
+      "conflicts_cited": [],
+      "error": null
+    }
+  },
+  "arbitration": {
+    "accepted_action": {
+      "id": "ACT-2",
+      "desc": "Steer traffic to neighbouring cell >1200 m from threshold",
+      "action_type": "traffic_steering",
+      "parameters": {
+        "min_distance_m": 1200.0
+      },
+      "score": 0.92,
+      "verdict": "ACCEPT_PREFERRED",
+      "rejection_reasons": [],
+      "evidence_ids": [],
+      "simulated_margin_db": null,
+      "margin_label": "SIMULATION"
+    },
+    "rejected_actions": [
+      {
+        "id": "ACT-1",
+        "desc": "Raise cell power +3 dB for QoS recovery",
+        "action_type": "power_change",
+        "parameters": {
+          "power_delta_db": 3.0
+        },
+        "score": null,
+        "verdict": "REJECT",
+        "rejection_reasons": [
+          "CON-INT-002: Power increase +3.0 dB near aviation area requires interference assessment (RR 4.10)",
+          "CON-INT-003 (PRECAUTIONARY): No simulated margin available; cannot verify safety",
+          "CON-IN-003 (PRECAUTIONARY): India airport-area 5G restrictions: no primary source with parameters (GAP-006). Precautionary default."
+        ],
+        "evidence_ids": [],
+        "simulated_margin_db": null,
+        "margin_label": "SIMULATION"
+      },
+      {
+        "id": "ACT-4",
+        "desc": "Activate unused carrier at 4100 MHz (n77)",
+        "action_type": "carrier_change",
+        "parameters": {
+          "carrier_mhz": 4100.0
+        },
+        "score": null,
+        "verdict": "REJECT",
+        "rejection_reasons": [
+          "CON-INT-003 (PRECAUTIONARY): No simulated margin available; cannot verify safety",
+          "CON-INT-004: Carrier 4100.0 MHz not licensed in India (3300-3670 MHz)",
+          "CON-IN-003 (PRECAUTIONARY): India airport-area 5G restrictions: no primary source with parameters (GAP-006). Precautionary default."
+        ],
+        "evidence_ids": [],
+        "simulated_margin_db": null,
+        "margin_label": "SIMULATION"
+      }
+    ],
+    "rejection_reasons": {
+      "ACT-1": [
+        "CON-INT-002: Power increase +3.0 dB near aviation area requires interference assessment (RR 4.10)",
+        "CON-INT-003 (PRECAUTIONARY): No simulated margin available; cannot verify safety",
+        "CON-IN-003 (PRECAUTIONARY): India airport-area 5G restrictions: no primary source with parameters (GAP-006). Precautionary default."
+      ],
+      "ACT-4": [
+        "CON-INT-003 (PRECAUTIONARY): No simulated margin available; cannot verify safety",
+        "CON-INT-004: Carrier 4100.0 MHz not licensed in India (3300-3670 MHz)",
+        "CON-IN-003 (PRECAUTIONARY): India airport-area 5G restrictions: no primary source with parameters (GAP-006). Precautionary default."
+      ]
+    },
+    "safety_status": "PROTECTED",
+    "spectrum_status": "COMPLIANT",
+    "authorization_status": "VERIFIED",
+    "performance_status": "OPTIMIZED_WITH_TRAFFIC_STEERING",
+    "evidence_ids": [
+      "CLM-008",
+      "CLM-021",
+      "CLM-022",
+      "CLM-023",
+      "CLM-032",
+      "CLM-033",
+      "CLM-035",
+      "CLM-102",
+      "CLM-103",
+      "CLM-106",
+      "CLM-109",
+      "CLM-110",
+      "CLM-111",
+      "CLM-112",
+      "CLM-113",
+      "CLM-115",
+      "CLM-116",
+      "CLM-130",
+      "CLM-131",
+      "CLM-132",
+      "CLM-133",
+      "CLM-134",
+      "CLM-135",
+      "CLM-136",
+      "CLM-137",
+      "CLM-140",
+      "CLM-141",
+      "CLM-143",
+      "CLM-144",
+      "CLM-151",
+      "CLM-154",
+      "CLM-155",
+      "CLM-162",
+      "CLM-163",
+      "CLM-164"
+    ],
+    "warnings": [
+      "Aircraft RA tolerance is unverified: using precautionary 6 dB limit",
+      "CON-IN-002 is NOT_YET_IN_FORCE (effective 2027-12-31)",
+      "CON-IN-004 legal status is inference",
+      "4100 MHz operation violates both national license and proximity boundary",
+      "DGCA AIC 19/2025 is NOT_YET_IN_FORCE as of 2026-10-07",
+      "CON-IN-003 legal status is evidence_gap",
+      "ECC 362 separation distance (CLM-151) applied as supporting analogy only"
+    ],
+    "conflicts_cited": [
+      "CONF-002",
+      "CONF-003"
+    ],
+    "requires_human_approval": false,
+    "rationale": "ACT-2 selected by deterministic constraint arbitration; the LLM provides explanatory synthesis only.",
+    "constraint_checks": [
+      {
+        "constraint_id": "CON-INT-001",
+        "title": "RA band is exclusive to altimeters",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-140"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-INT-002",
+        "title": "Safety services need special protection measures",
+        "type": "HARD",
+        "result": "FAIL",
+        "reason": "Power increase +3.0 dB near aviation area requires interference assessment (RR 4.10)",
+        "evidence_ids": [
+          "CLM-141"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-INT-003",
+        "title": "Minimum safety margin",
+        "type": "HARD",
+        "result": "UNKNOWN",
+        "reason": "No simulated margin available; cannot verify safety",
+        "evidence_ids": [
+          "CLM-106",
+          "CLM-151"
+        ],
+        "legal_status": "analysis_parameter",
+        "effective_from": null,
+        "as_of_status": "ANALYSIS_PARAMETER"
+      },
+      {
+        "constraint_id": "CON-INT-004",
+        "title": "Authorization is national, not by band capability",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-143",
+          "CLM-144"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-INT-005",
+        "title": "Pre-enablement consultation",
+        "type": "ADVISORY",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-155",
+          "CLM-023"
+        ],
+        "legal_status": "guidance",
+        "effective_from": null,
+        "as_of_status": "guidance"
+      },
+      {
+        "constraint_id": "CON-INT-006",
+        "title": "Mitigation menu",
+        "type": "ADVISORY",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-021",
+          "CLM-022"
+        ],
+        "legal_status": "guidance",
+        "effective_from": null,
+        "as_of_status": "guidance"
+      },
+      {
+        "constraint_id": "CON-US-001",
+        "title": "FCC Upper C-band base-station limits",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-111",
+          "CLM-112"
+        ],
+        "legal_status": "adopted_service_from_2030-12-31",
+        "effective_from": "2030-12-31",
+        "as_of_status": "NOT_YET_IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-US-002",
+        "title": "FCC unwanted emission into RA band",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-112",
+          "CLM-113",
+          "CLM-110"
+        ],
+        "legal_status": "adopted_effective_date_per_FCC_notice",
+        "effective_from": null,
+        "as_of_status": "adopted_effective_date_per_FCC_notice"
+      },
+      {
+        "constraint_id": "CON-US-003",
+        "title": "Lower C-band voluntary commitments",
+        "type": "SOFT",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-115",
+          "CLM-154"
+        ],
+        "legal_status": "voluntary_non_binding",
+        "effective_from": "through 2028-01-01 (extension to 2030-12-31 offered)",
+        "as_of_status": "VOLUNTARY_NON_BINDING"
+      },
+      {
+        "constraint_id": "CON-US-004",
+        "title": "FAA aircraft tolerance requirement",
+        "type": "INFORMATIONAL",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-102",
+          "CLM-103"
+        ],
+        "legal_status": "adopted_pending_effective_date",
+        "effective_from": "compliance 2030-12-30 / 2034-10-31",
+        "as_of_status": "ADOPTED_PENDING"
+      },
+      {
+        "constraint_id": "CON-IN-001",
+        "title": "India C-band allocation",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-136",
+          "CLM-137"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-IN-002",
+        "title": "DGCA AIC 19/2025 limitations",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-131",
+          "CLM-132",
+          "CLM-133",
+          "CLM-134"
+        ],
+        "legal_status": "published_NOT_YET_IN_FORCE",
+        "effective_from": "2027-12-31",
+        "as_of_status": "NOT_YET_IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-IN-003",
+        "title": "Airport-area 5G restrictions in India",
+        "type": "PRECAUTIONARY",
+        "result": "UNKNOWN",
+        "reason": "India airport-area 5G restrictions: no primary source with parameters (GAP-006). Precautionary default.",
+        "evidence_ids": [
+          "CLM-135",
+          "CLM-136"
+        ],
+        "legal_status": "evidence_gap",
+        "effective_from": null,
+        "as_of_status": "EVIDENCE_GAP"
+      },
+      {
+        "constraint_id": "CON-IN-004",
+        "title": "Dynamic changes need licensee + coordination check",
+        "type": "ADVISORY",
+        "result": "FAIL",
+        "reason": "Dynamic network changes that increase emissions require human authorization in India (inference from institutional claims)",
+        "evidence_ids": [
+          "CLM-032",
+          "CLM-033",
+          "CLM-035",
+          "CLM-130"
+        ],
+        "legal_status": "inference",
+        "effective_from": null,
+        "as_of_status": "INFERENCE"
+      },
+      {
+        "constraint_id": "CON-RAD-001",
+        "title": "Radar Altimeter Minimum Safety Margin (>= 6 dB)",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-106",
+          "CLM-109"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-RAD-002",
+        "title": "Glidepath Approach Corridor Protection",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-134"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-3GPP-001",
+        "title": "Cellular QoS & PRB Load Floor",
+        "type": "SOFT",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-008"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-INT-001",
+        "title": "RA band is exclusive to altimeters",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-140"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-INT-002",
+        "title": "Safety services need special protection measures",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-141"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-INT-003",
+        "title": "Minimum safety margin",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "Non-emitting mitigation action preserves existing airspace safety margin envelope",
+        "evidence_ids": [
+          "CLM-106",
+          "CLM-151"
+        ],
+        "legal_status": "analysis_parameter",
+        "effective_from": null,
+        "as_of_status": "ANALYSIS_PARAMETER"
+      },
+      {
+        "constraint_id": "CON-INT-004",
+        "title": "Authorization is national, not by band capability",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-143",
+          "CLM-144"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-INT-005",
+        "title": "Pre-enablement consultation",
+        "type": "ADVISORY",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-155",
+          "CLM-023"
+        ],
+        "legal_status": "guidance",
+        "effective_from": null,
+        "as_of_status": "guidance"
+      },
+      {
+        "constraint_id": "CON-INT-006",
+        "title": "Mitigation menu",
+        "type": "ADVISORY",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-021",
+          "CLM-022"
+        ],
+        "legal_status": "guidance",
+        "effective_from": null,
+        "as_of_status": "guidance"
+      },
+      {
+        "constraint_id": "CON-US-001",
+        "title": "FCC Upper C-band base-station limits",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-111",
+          "CLM-112"
+        ],
+        "legal_status": "adopted_service_from_2030-12-31",
+        "effective_from": "2030-12-31",
+        "as_of_status": "NOT_YET_IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-US-002",
+        "title": "FCC unwanted emission into RA band",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-112",
+          "CLM-113",
+          "CLM-110"
+        ],
+        "legal_status": "adopted_effective_date_per_FCC_notice",
+        "effective_from": null,
+        "as_of_status": "adopted_effective_date_per_FCC_notice"
+      },
+      {
+        "constraint_id": "CON-US-003",
+        "title": "Lower C-band voluntary commitments",
+        "type": "SOFT",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-115",
+          "CLM-154"
+        ],
+        "legal_status": "voluntary_non_binding",
+        "effective_from": "through 2028-01-01 (extension to 2030-12-31 offered)",
+        "as_of_status": "VOLUNTARY_NON_BINDING"
+      },
+      {
+        "constraint_id": "CON-US-004",
+        "title": "FAA aircraft tolerance requirement",
+        "type": "INFORMATIONAL",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-102",
+          "CLM-103"
+        ],
+        "legal_status": "adopted_pending_effective_date",
+        "effective_from": "compliance 2030-12-30 / 2034-10-31",
+        "as_of_status": "ADOPTED_PENDING"
+      },
+      {
+        "constraint_id": "CON-IN-001",
+        "title": "India C-band allocation",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-136",
+          "CLM-137"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-IN-002",
+        "title": "DGCA AIC 19/2025 limitations",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-131",
+          "CLM-132",
+          "CLM-133",
+          "CLM-134"
+        ],
+        "legal_status": "published_NOT_YET_IN_FORCE",
+        "effective_from": "2027-12-31",
+        "as_of_status": "NOT_YET_IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-IN-003",
+        "title": "Airport-area 5G restrictions in India",
+        "type": "PRECAUTIONARY",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-135",
+          "CLM-136"
+        ],
+        "legal_status": "evidence_gap",
+        "effective_from": null,
+        "as_of_status": "EVIDENCE_GAP"
+      },
+      {
+        "constraint_id": "CON-IN-004",
+        "title": "Dynamic changes need licensee + coordination check",
+        "type": "ADVISORY",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-032",
+          "CLM-033",
+          "CLM-035",
+          "CLM-130"
+        ],
+        "legal_status": "inference",
+        "effective_from": null,
+        "as_of_status": "INFERENCE"
+      },
+      {
+        "constraint_id": "CON-RAD-001",
+        "title": "Radar Altimeter Minimum Safety Margin (>= 6 dB)",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-106",
+          "CLM-109"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-RAD-002",
+        "title": "Glidepath Approach Corridor Protection",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-134"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-3GPP-001",
+        "title": "Cellular QoS & PRB Load Floor",
+        "type": "SOFT",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-008"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-INT-001",
+        "title": "RA band is exclusive to altimeters",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-140"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-INT-002",
+        "title": "Safety services need special protection measures",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-141"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-INT-003",
+        "title": "Minimum safety margin",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "SIMULATION margin 46.6 dB >= required 6 dB",
+        "evidence_ids": [
+          "CLM-106",
+          "CLM-151"
+        ],
+        "legal_status": "analysis_parameter",
+        "effective_from": null,
+        "as_of_status": "ANALYSIS_PARAMETER"
+      },
+      {
+        "constraint_id": "CON-INT-004",
+        "title": "Authorization is national, not by band capability",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-143",
+          "CLM-144"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-INT-005",
+        "title": "Pre-enablement consultation",
+        "type": "ADVISORY",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-155",
+          "CLM-023"
+        ],
+        "legal_status": "guidance",
+        "effective_from": null,
+        "as_of_status": "guidance"
+      },
+      {
+        "constraint_id": "CON-INT-006",
+        "title": "Mitigation menu",
+        "type": "ADVISORY",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-021",
+          "CLM-022"
+        ],
+        "legal_status": "guidance",
+        "effective_from": null,
+        "as_of_status": "guidance"
+      },
+      {
+        "constraint_id": "CON-US-001",
+        "title": "FCC Upper C-band base-station limits",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-111",
+          "CLM-112"
+        ],
+        "legal_status": "adopted_service_from_2030-12-31",
+        "effective_from": "2030-12-31",
+        "as_of_status": "NOT_YET_IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-US-002",
+        "title": "FCC unwanted emission into RA band",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-112",
+          "CLM-113",
+          "CLM-110"
+        ],
+        "legal_status": "adopted_effective_date_per_FCC_notice",
+        "effective_from": null,
+        "as_of_status": "adopted_effective_date_per_FCC_notice"
+      },
+      {
+        "constraint_id": "CON-US-003",
+        "title": "Lower C-band voluntary commitments",
+        "type": "SOFT",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-115",
+          "CLM-154"
+        ],
+        "legal_status": "voluntary_non_binding",
+        "effective_from": "through 2028-01-01 (extension to 2030-12-31 offered)",
+        "as_of_status": "VOLUNTARY_NON_BINDING"
+      },
+      {
+        "constraint_id": "CON-US-004",
+        "title": "FAA aircraft tolerance requirement",
+        "type": "INFORMATIONAL",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-102",
+          "CLM-103"
+        ],
+        "legal_status": "adopted_pending_effective_date",
+        "effective_from": "compliance 2030-12-30 / 2034-10-31",
+        "as_of_status": "ADOPTED_PENDING"
+      },
+      {
+        "constraint_id": "CON-IN-001",
+        "title": "India C-band allocation",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-136",
+          "CLM-137"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-IN-002",
+        "title": "DGCA AIC 19/2025 limitations",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-131",
+          "CLM-132",
+          "CLM-133",
+          "CLM-134"
+        ],
+        "legal_status": "published_NOT_YET_IN_FORCE",
+        "effective_from": "2027-12-31",
+        "as_of_status": "NOT_YET_IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-IN-003",
+        "title": "Airport-area 5G restrictions in India",
+        "type": "PRECAUTIONARY",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-135",
+          "CLM-136"
+        ],
+        "legal_status": "evidence_gap",
+        "effective_from": null,
+        "as_of_status": "EVIDENCE_GAP"
+      },
+      {
+        "constraint_id": "CON-IN-004",
+        "title": "Dynamic changes need licensee + coordination check",
+        "type": "ADVISORY",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-032",
+          "CLM-033",
+          "CLM-035",
+          "CLM-130"
+        ],
+        "legal_status": "inference",
+        "effective_from": null,
+        "as_of_status": "INFERENCE"
+      },
+      {
+        "constraint_id": "CON-RAD-001",
+        "title": "Radar Altimeter Minimum Safety Margin (>= 6 dB)",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-106",
+          "CLM-109"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-RAD-002",
+        "title": "Glidepath Approach Corridor Protection",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-134"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-3GPP-001",
+        "title": "Cellular QoS & PRB Load Floor",
+        "type": "SOFT",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-008"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-INT-001",
+        "title": "RA band is exclusive to altimeters",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-140"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-INT-002",
+        "title": "Safety services need special protection measures",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-141"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-INT-003",
+        "title": "Minimum safety margin",
+        "type": "HARD",
+        "result": "UNKNOWN",
+        "reason": "No simulated margin available; cannot verify safety",
+        "evidence_ids": [
+          "CLM-106",
+          "CLM-151"
+        ],
+        "legal_status": "analysis_parameter",
+        "effective_from": null,
+        "as_of_status": "ANALYSIS_PARAMETER"
+      },
+      {
+        "constraint_id": "CON-INT-004",
+        "title": "Authorization is national, not by band capability",
+        "type": "HARD",
+        "result": "FAIL",
+        "reason": "Carrier 4100.0 MHz not licensed in India (3300-3670 MHz)",
+        "evidence_ids": [
+          "CLM-143",
+          "CLM-144"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-INT-005",
+        "title": "Pre-enablement consultation",
+        "type": "ADVISORY",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-155",
+          "CLM-023"
+        ],
+        "legal_status": "guidance",
+        "effective_from": null,
+        "as_of_status": "guidance"
+      },
+      {
+        "constraint_id": "CON-INT-006",
+        "title": "Mitigation menu",
+        "type": "ADVISORY",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-021",
+          "CLM-022"
+        ],
+        "legal_status": "guidance",
+        "effective_from": null,
+        "as_of_status": "guidance"
+      },
+      {
+        "constraint_id": "CON-US-001",
+        "title": "FCC Upper C-band base-station limits",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-111",
+          "CLM-112"
+        ],
+        "legal_status": "adopted_service_from_2030-12-31",
+        "effective_from": "2030-12-31",
+        "as_of_status": "NOT_YET_IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-US-002",
+        "title": "FCC unwanted emission into RA band",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-112",
+          "CLM-113",
+          "CLM-110"
+        ],
+        "legal_status": "adopted_effective_date_per_FCC_notice",
+        "effective_from": null,
+        "as_of_status": "adopted_effective_date_per_FCC_notice"
+      },
+      {
+        "constraint_id": "CON-US-003",
+        "title": "Lower C-band voluntary commitments",
+        "type": "SOFT",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-115",
+          "CLM-154"
+        ],
+        "legal_status": "voluntary_non_binding",
+        "effective_from": "through 2028-01-01 (extension to 2030-12-31 offered)",
+        "as_of_status": "VOLUNTARY_NON_BINDING"
+      },
+      {
+        "constraint_id": "CON-US-004",
+        "title": "FAA aircraft tolerance requirement",
+        "type": "INFORMATIONAL",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-102",
+          "CLM-103"
+        ],
+        "legal_status": "adopted_pending_effective_date",
+        "effective_from": "compliance 2030-12-30 / 2034-10-31",
+        "as_of_status": "ADOPTED_PENDING"
+      },
+      {
+        "constraint_id": "CON-IN-001",
+        "title": "India C-band allocation",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-136",
+          "CLM-137"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-IN-002",
+        "title": "DGCA AIC 19/2025 limitations",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-131",
+          "CLM-132",
+          "CLM-133",
+          "CLM-134"
+        ],
+        "legal_status": "published_NOT_YET_IN_FORCE",
+        "effective_from": "2027-12-31",
+        "as_of_status": "NOT_YET_IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-IN-003",
+        "title": "Airport-area 5G restrictions in India",
+        "type": "PRECAUTIONARY",
+        "result": "UNKNOWN",
+        "reason": "India airport-area 5G restrictions: no primary source with parameters (GAP-006). Precautionary default.",
+        "evidence_ids": [
+          "CLM-135",
+          "CLM-136"
+        ],
+        "legal_status": "evidence_gap",
+        "effective_from": null,
+        "as_of_status": "EVIDENCE_GAP"
+      },
+      {
+        "constraint_id": "CON-IN-004",
+        "title": "Dynamic changes need licensee + coordination check",
+        "type": "ADVISORY",
+        "result": "FAIL",
+        "reason": "Dynamic network changes that increase emissions require human authorization in India (inference from institutional claims)",
+        "evidence_ids": [
+          "CLM-032",
+          "CLM-033",
+          "CLM-035",
+          "CLM-130"
+        ],
+        "legal_status": "inference",
+        "effective_from": null,
+        "as_of_status": "INFERENCE"
+      },
+      {
+        "constraint_id": "CON-RAD-001",
+        "title": "Radar Altimeter Minimum Safety Margin (>= 6 dB)",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-106",
+          "CLM-109"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-RAD-002",
+        "title": "Glidepath Approach Corridor Protection",
+        "type": "HARD",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-134"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      },
+      {
+        "constraint_id": "CON-3GPP-001",
+        "title": "Cellular QoS & PRB Load Floor",
+        "type": "SOFT",
+        "result": "PASS",
+        "reason": "No violation detected for this action",
+        "evidence_ids": [
+          "CLM-008"
+        ],
+        "legal_status": "in_force",
+        "effective_from": null,
+        "as_of_status": "IN_FORCE"
+      }
+    ]
+  },
+  "candidate_actions": [
+    {
+      "id": "ACT-1",
+      "desc": "Raise cell power +3 dB for QoS recovery",
+      "action_type": "power_change",
+      "parameters": {
+        "power_delta_db": 3.0
+      },
+      "score": null,
+      "verdict": "REJECT",
+      "rejection_reasons": [
+        "CON-INT-002: Power increase +3.0 dB near aviation area requires interference assessment (RR 4.10)",
+        "CON-INT-003 (PRECAUTIONARY): No simulated margin available; cannot verify safety",
+        "CON-IN-003 (PRECAUTIONARY): India airport-area 5G restrictions: no primary source with parameters (GAP-006). Precautionary default."
+      ],
+      "evidence_ids": [],
+      "simulated_margin_db": null,
+      "margin_label": "SIMULATION"
+    },
+    {
+      "id": "ACT-2",
+      "desc": "Steer traffic to neighbouring cell >1200 m from threshold",
+      "action_type": "traffic_steering",
+      "parameters": {
+        "min_distance_m": 1200.0
+      },
+      "score": 0.92,
+      "verdict": "ACCEPT_PREFERRED",
+      "rejection_reasons": [],
+      "evidence_ids": [],
+      "simulated_margin_db": null,
+      "margin_label": "SIMULATION"
+    },
+    {
+      "id": "ACT-3",
+      "desc": "Downtilt 3 deg + cap PRB-based power",
+      "action_type": "downtilt",
+      "parameters": {
+        "downtilt_delta_deg": 3.0
+      },
+      "score": null,
+      "verdict": null,
+      "rejection_reasons": [],
+      "evidence_ids": [],
+      "simulated_margin_db": 46.59,
+      "margin_label": "SIMULATION"
+    },
+    {
+      "id": "ACT-4",
+      "desc": "Activate unused carrier at 4100 MHz (n77)",
+      "action_type": "carrier_change",
+      "parameters": {
+        "carrier_mhz": 4100.0
+      },
+      "score": null,
+      "verdict": "REJECT",
+      "rejection_reasons": [
+        "CON-INT-003 (PRECAUTIONARY): No simulated margin available; cannot verify safety",
+        "CON-INT-004: Carrier 4100.0 MHz not licensed in India (3300-3670 MHz)",
+        "CON-IN-003 (PRECAUTIONARY): India airport-area 5G restrictions: no primary source with parameters (GAP-006). Precautionary default."
+      ],
+      "evidence_ids": [],
+      "simulated_margin_db": null,
+      "margin_label": "SIMULATION"
+    }
+  ],
+  "total_tokens": 0,
+  "total_latency_s": 0.238
+}

@@ -1,0 +1,329 @@
+{
+ "as_of": "2026-10-07",
+ "note": "Machine-checkable constraints for Arbitration. type: HARD=blocks action; SOFT=weighs; ADVISORY=requires justification; UNKNOWN=forces precaution. legal_status must be checked against as_of before citing.",
+ "constraints": [
+  {
+   "constraint_id": "CON-INT-001",
+   "title": "RA band is exclusive to altimeters",
+   "jurisdiction": "international",
+   "type": "HARD",
+   "legal_status": "in_force",
+   "effective_from": null,
+   "rule": "No 5G carrier, channel edge or intentional emission may be placed inside 4200-4400 MHz.",
+   "parameters": {
+    "forbidden_band_mhz": [
+     4200,
+     4400
+    ]
+   },
+   "evidence_claims": [
+    "CLM-140"
+   ],
+   "note": ""
+  },
+  {
+   "constraint_id": "CON-INT-002",
+   "title": "Safety services need special protection measures",
+   "jurisdiction": "international",
+   "type": "HARD",
+   "legal_status": "in_force",
+   "effective_from": null,
+   "rule": "Any network action that raises emissions near aviation-sensitive areas must be accompanied by an interference assessment (RR 4.10).",
+   "parameters": {},
+   "evidence_claims": [
+    "CLM-141"
+   ],
+   "note": ""
+  },
+  {
+   "constraint_id": "CON-INT-003",
+   "title": "Minimum safety margin",
+   "jurisdiction": "international",
+   "type": "HARD",
+   "legal_status": "analysis_parameter",
+   "effective_from": null,
+   "rule": "Predicted interference at the radio altimeter must remain at least 6 dB below the tolerance level (ICAO range 6-10 dB). Margin is simulation output, not a legal limit.",
+   "parameters": {
+    "min_margin_db": 6,
+    "icao_range_db": [
+     6,
+     10
+    ]
+   },
+   "evidence_claims": [
+    "CLM-106",
+    "CLM-151"
+   ],
+   "note": "Label computed margin as SIMULATION; threshold is FACT."
+  },
+  {
+   "constraint_id": "CON-INT-004",
+   "title": "Authorization is national, not by band capability",
+   "jurisdiction": "international",
+   "type": "HARD",
+   "legal_status": "in_force",
+   "effective_from": null,
+   "rule": "A carrier may use only frequencies licensed to the operator in that jurisdiction, even if the 3GPP band (n77/n78/n79) extends further.",
+   "parameters": {
+    "n77_mhz": [
+     3300,
+     4200
+    ]
+   },
+   "evidence_claims": [
+    "CLM-143",
+    "CLM-144"
+   ],
+   "note": ""
+  },
+  {
+   "constraint_id": "CON-INT-005",
+   "title": "Pre-enablement consultation",
+   "jurisdiction": "international",
+   "type": "ADVISORY",
+   "legal_status": "guidance",
+   "effective_from": null,
+   "rule": "Consult aviation safety regulators, experts and airspace users before enabling or materially changing cellular broadband near airports.",
+   "parameters": {},
+   "evidence_claims": [
+    "CLM-155",
+    "CLM-023"
+   ],
+   "note": "Per ICAO guidance; not binding on a State."
+  },
+  {
+   "constraint_id": "CON-INT-006",
+   "title": "Mitigation menu",
+   "jurisdiction": "international",
+   "type": "ADVISORY",
+   "legal_status": "guidance",
+   "effective_from": null,
+   "rule": "Candidate mitigations: power limits, downward antenna tilt, spectrum separation, exclusion/precautionary zones.",
+   "parameters": {
+    "actions": [
+     "power_limit",
+     "downtilt",
+     "frequency_separation",
+     "exclusion_zone"
+    ]
+   },
+   "evidence_claims": [
+    "CLM-021",
+    "CLM-022"
+   ],
+   "note": ""
+  },
+  {
+   "constraint_id": "CON-US-001",
+   "title": "FCC Upper C-band base-station limits",
+   "jurisdiction": "United States",
+   "type": "HARD",
+   "legal_status": "adopted_service_from_2030-12-31",
+   "effective_from": "2030-12-31",
+   "rule": "Upper C-band BS: 3980-4140 MHz, EIRP <= 65 dBm/MHz, height <= 450 ft AGL.",
+   "parameters": {
+    "eirp_dbm_mhz": 65,
+    "height_ft_agl": 450,
+    "band_mhz": [
+     3980,
+     4140
+    ]
+   },
+   "evidence_claims": [
+    "CLM-111",
+    "CLM-112"
+   ],
+   "note": ""
+  },
+  {
+   "constraint_id": "CON-US-002",
+   "title": "FCC unwanted emission into RA band",
+   "jurisdiction": "United States",
+   "type": "HARD",
+   "legal_status": "adopted_effective_date_per_FCC_notice",
+   "effective_from": null,
+   "rule": "Emissions into 4200-4400 MHz <= -28.4 dBm/MHz EIRP (dual-pol) or <= -46 dBm/MHz conducted; applies to Upper and Lower C-band.",
+   "parameters": {
+    "eirp_dbm_mhz": -28.4,
+    "conducted_dbm_mhz": -46
+   },
+   "evidence_claims": [
+    "CLM-112",
+    "CLM-113",
+    "CLM-110"
+   ],
+   "note": "FCC primary text not retrieved."
+  },
+  {
+   "constraint_id": "CON-US-003",
+   "title": "Lower C-band voluntary commitments",
+   "jurisdiction": "United States",
+   "type": "SOFT",
+   "legal_status": "voluntary_non_binding",
+   "effective_from": "through 2028-01-01 (extension to 2030-12-31 offered)",
+   "rule": "Operators coordinate power levels and limit emissions near airports; elevation-above-horizon limits and tower coordination.",
+   "parameters": {
+    "until": "2028-01-01",
+    "offered_until": "2030-12-31"
+   },
+   "evidence_claims": [
+    "CLM-115",
+    "CLM-154"
+   ],
+   "note": "Do not present as law."
+  },
+  {
+   "constraint_id": "CON-US-004",
+   "title": "FAA aircraft tolerance requirement",
+   "jurisdiction": "United States",
+   "type": "INFORMATIONAL",
+   "legal_status": "adopted_pending_effective_date",
+   "effective_from": "compliance 2030-12-30 / 2034-10-31",
+   "rule": "Binds aircraft/operators, not network operators. FAA says it cannot regulate the interference environment.",
+   "parameters": {
+    "deadlines": [
+     "2030-12-30",
+     "2034-10-31"
+    ]
+   },
+   "evidence_claims": [
+    "CLM-102",
+    "CLM-103"
+   ],
+   "note": ""
+  },
+  {
+   "constraint_id": "CON-IN-001",
+   "title": "India C-band allocation",
+   "jurisdiction": "India",
+   "type": "HARD",
+   "legal_status": "in_force",
+   "effective_from": null,
+   "rule": "Public 5G C-band in India is 3300-3670 MHz (press-reported; confirm in NFAP-2025 / auction notice). 530 MHz separation from RA band (inference).",
+   "parameters": {
+    "band_mhz": [
+     3300,
+     3670
+    ],
+    "separation_to_ra_mhz": 530
+   },
+   "evidence_claims": [
+    "CLM-136",
+    "CLM-137"
+   ],
+   "note": "Tier-3 source: verify against NFAP 2025 before decision-critical use."
+  },
+  {
+   "constraint_id": "CON-IN-002",
+   "title": "DGCA AIC 19/2025 limitations",
+   "jurisdiction": "India",
+   "type": "HARD",
+   "legal_status": "published_NOT_YET_IN_FORCE",
+   "effective_from": "2027-12-31",
+   "rule": "From 2027-12-31 non-RA-tolerant aircraft may not conduct ILS/CAT II-III/autoland/HUD/EFVS-to-touchdown (airplanes) or listed RA-dependent rotorcraft ops in Indian airspace.",
+   "parameters": {
+    "effective": "2027-12-31",
+    "airplane_prohibited": [
+     "ILS_IAP",
+     "SA_CAT_I",
+     "SA_CAT_II",
+     "CAT_II",
+     "CAT_III",
+     "autoland",
+     "HUD_to_touchdown",
+     "EFVS_to_touchdown"
+    ]
+   },
+   "evidence_claims": [
+    "CLM-131",
+    "CLM-132",
+    "CLM-133",
+    "CLM-134"
+   ],
+   "note": "On the as-of date this is NOT binding; arbitration must not cite it as a current legal prohibition, but may treat it as the regulator's stated risk finding (CLM-130)."
+  },
+  {
+   "constraint_id": "CON-IN-003",
+   "title": "Airport-area 5G restrictions in India",
+   "jurisdiction": "India",
+   "type": "PRECAUTIONARY",
+   "legal_status": "evidence_gap",
+   "effective_from": null,
+   "rule": "Press reports DGCA/DoT interim restrictions near airports; no primary text with distances/power limits found. Arbitration must default to precautionary behaviour and flag authorization uncertainty.",
+   "parameters": {},
+   "evidence_claims": [
+    "CLM-135",
+    "CLM-136"
+   ],
+   "note": "See GAP-006."
+  },
+  {
+   "constraint_id": "CON-IN-004",
+   "title": "Dynamic changes need licensee + coordination check",
+   "jurisdiction": "India",
+   "type": "ADVISORY",
+   "legal_status": "inference",
+   "effective_from": null,
+   "rule": "Spectrum assignment/regulation sits with DoT-WPC; aviation safety with DGCA/AAI; no machine-readable interface for dynamic mitigation exists in the KB (GAP-001/002). Dynamic power/beam changes that increase emissions require human-in-loop authorization.",
+   "parameters": {
+    "requires_human_authorization": true
+   },
+   "evidence_claims": [
+    "CLM-032",
+    "CLM-033",
+    "CLM-035",
+    "CLM-130"
+   ],
+   "note": "INFERENCE built from institutional claims."
+  },
+  {
+   "constraint_id": "CON-RAD-001",
+   "title": "Radar Altimeter Minimum Safety Margin (>= 6 dB)",
+   "jurisdiction": "international",
+   "type": "HARD",
+   "legal_status": "in_force",
+   "effective_from": null,
+   "rule": "Predicted interference at the radio altimeter must remain at least 6 dB below receiver tolerance under worst-case geometry (ICAO Doc 9718).",
+   "parameters": {
+    "min_margin_db": 6.0
+   },
+   "evidence_claims": [
+    "CLM-106",
+    "CLM-109"
+   ],
+   "note": "Derived from ICAO 6-10 dB aeronautical safety buffer."
+  },
+  {
+   "constraint_id": "CON-RAD-002",
+   "title": "Glidepath Approach Corridor Protection",
+   "jurisdiction": "international",
+   "type": "HARD",
+   "legal_status": "in_force",
+   "effective_from": null,
+   "rule": "Base station EIRP may not increase for cells whose main beam intersects the runway approach corridor within 1200 m.",
+   "parameters": {
+    "corridor_buffer_m": 1200
+   },
+   "evidence_claims": [
+    "CLM-134"
+   ],
+   "note": "Aviation approach corridor power freeze."
+  },
+  {
+   "constraint_id": "CON-3GPP-001",
+   "title": "Cellular QoS & PRB Load Floor",
+   "jurisdiction": "international",
+   "type": "SOFT",
+   "legal_status": "in_force",
+   "effective_from": null,
+   "rule": "Coexistence mitigations should preserve acceptable subscriber throughput and prevent indefinite PRB starvation.",
+   "parameters": {
+    "min_throughput_retention_pct": 70
+   },
+   "evidence_claims": [
+    "CLM-008"
+   ],
+   "note": "3GPP TS 23.501 system architecture QoS floor."
+  }
+ ]
+}

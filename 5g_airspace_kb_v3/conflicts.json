@@ -1,0 +1,122 @@
+[
+ {
+  "conflict_id": "CONF-001",
+  "topic": "Is 3.4-3.8 GHz 5G safe for radio altimeters in Europe?",
+  "positions": [
+   {
+    "holder": "ECC Report 362 / CEPT",
+    "view": "Margins >= 6 dB in modelled ILS scenario; no interference in tests",
+    "claims": [
+     "CLM-151"
+    ]
+   },
+   {
+    "holder": "EASA (on retrofit)",
+    "view": "Report does not justify fleet-wide retrofit; case-by-case",
+    "claims": [
+     "CLM-152"
+    ]
+   },
+   {
+    "holder": "Aviation interests / EUROCONTROL study",
+    "view": "Cannot conclude no interference for all cases; not representative of all altimeters",
+    "claims": [
+     "CLM-153"
+    ]
+   }
+  ],
+  "handling": "Retain all; arbitration should weight by jurisdiction and cite uncertainty"
+ },
+ {
+  "conflict_id": "CONF-002",
+  "topic": "Is India's DGCA measure a retrofit mandate or flight-manual limitation?",
+  "positions": [
+   {
+    "holder": "Trade report (tier 3)",
+    "view": "Airlines must retrofit by 2027-12-31",
+    "claims": [
+     "CLM-135"
+    ]
+   },
+   {
+    "holder": "AIC 19/2025 text (tier 1)",
+    "view": "Limitations apply to non-tolerant aircraft from 2027-12-31; tolerant aircraft need no action",
+    "claims": [
+     "CLM-131",
+     "CLM-134"
+    ]
+   }
+  ],
+  "handling": "Prefer tier-1 text; effect is functionally similar"
+ },
+ {
+  "conflict_id": "CONF-003",
+  "topic": "Does 500+ MHz separation make India's C-band safe?",
+  "positions": [
+   {
+    "holder": "ITU-APT India / industry (press)",
+    "view": "No risk; 3300-3670 MHz is far below 4200 MHz",
+    "claims": [
+     "CLM-137"
+    ]
+   },
+   {
+    "holder": "DGCA (AIC 19/2025)",
+    "view": "RAs cannot be relied on under 3.3-3.67 GHz interference",
+    "claims": [
+     "CLM-130"
+    ]
+   }
+  ],
+  "handling": "Regulator's finding governs aviation ops; separation informs simulator priors only"
+ },
+ {
+  "conflict_id": "CONF-004",
+  "topic": "Minimum separation distance for safety case",
+  "positions": [
+   {
+    "holder": "FAA",
+    "view": "35 ft sphere",
+    "claims": [
+     "CLM-107"
+    ]
+   },
+   {
+    "holder": "CTIA",
+    "view": "300 ft horizontal / 50 ft vertical",
+    "claims": [
+     "CLM-120"
+    ]
+   },
+   {
+    "holder": "Lockheed Martin",
+    "view": "35 ft too small",
+    "claims": [
+     "CLM-120"
+    ]
+   }
+  ],
+  "handling": "Expose as parameter range in simulator; do not hard-code one value"
+ },
+ {
+  "conflict_id": "CONF-005",
+  "topic": "Does the ITM need to extend above 500 ft AGL?",
+  "positions": [
+   {
+    "holder": "FAA",
+    "view": "No; 450 ft BS cap + path loss",
+    "claims": [
+     "CLM-105"
+    ]
+   },
+   {
+    "holder": "Joint Aviation Community / ALPA",
+    "view": "Yes, full operating envelope",
+    "claims": [
+     "CLM-105"
+    ]
+   }
+  ],
+  "handling": "Airspace agent should flag residual risk above 500 ft for non-listed scenarios"
+ }
+]

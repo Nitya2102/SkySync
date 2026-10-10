@@ -1,0 +1,88 @@
+{
+ "scenario_id": "DEMO-001",
+ "label": "SIMULATION - synthetic, not authoritative evidence",
+ "as_of": "2026-10-07",
+ "simulation_state": {
+  "jurisdiction": "India",
+  "airport": "SYNTHETIC-AIRPORT-A",
+  "cell": {
+   "id": "CELL-17",
+   "band": "n78",
+   "carrier_mhz": [
+    3300,
+    3670
+   ],
+   "prb_util_pct": 94,
+   "throughput_drop_pct": 38,
+   "tx_power_dbm_per_mhz": null,
+   "height_m": 30,
+   "distance_to_runway_threshold_m": 900,
+   "lateral_offset_m": 300
+  },
+  "aircraft": {
+   "callsign": "SYN123",
+   "phase": "final_approach",
+   "height_agl_ft": 450,
+   "ra_tolerant": "unknown",
+   "approach": "ILS CAT II"
+  }
+ },
+ "candidate_actions": [
+  {
+   "id": "ACT-1",
+   "desc": "Raise cell power +3 dB",
+   "expected": {
+    "arbitration": "REJECT",
+    "reasons": [
+     "CON-INT-003 margin cannot be shown",
+     "CON-IN-004 needs human authorization",
+     "CON-IN-003 unknown airport restrictions"
+    ]
+   }
+  },
+  {
+   "id": "ACT-2",
+   "desc": "Steer traffic to neighbouring cell >1200 m from threshold",
+   "expected": {
+    "arbitration": "ACCEPT_PREFERRED",
+    "reasons": [
+     "reduces emissions near aircraft",
+     "ECC362 distance reference (CLM-151) as supporting analogy only"
+    ]
+   }
+  },
+  {
+   "id": "ACT-3",
+   "desc": "Downtilt 3 deg + cap PRB-based power",
+   "expected": {
+    "arbitration": "ACCEPT_IF_SIM_MARGIN>=6dB",
+    "reasons": [
+     "CON-INT-006 mitigation menu"
+    ]
+   }
+  },
+  {
+   "id": "ACT-4",
+   "desc": "Activate unused carrier at 4100 MHz (n77)",
+   "expected": {
+    "arbitration": "REJECT",
+    "reasons": [
+     "CON-INT-004 not licensed in India",
+     "CON-INT-001 proximity to RA band"
+    ]
+   }
+  }
+ ],
+ "evidence_expectations": {
+  "policy_agent": [
+   "CON-IN-002 status=NOT_YET_IN_FORCE",
+   "GAP-006"
+  ],
+  "spectrum_agent": [
+   "CON-INT-001",
+   "CON-INT-004",
+   "CON-US-002 (analogy only)"
+  ],
+  "arbitration": "must output evidence IDs and label simulated margin as SIMULATION"
+ }
+}
